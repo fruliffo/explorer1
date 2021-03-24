@@ -34,7 +34,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         // Add widgets.
         this.visuaStage = node.widgets.append('VisualStage', header);
-        this.visualRound = node.widgets.append('VisualRound', header);
+
+        this.visualRound = node.widgets.append('VisualRound', header, {
+            displayMode: [
+                'COUNT_UP_STAGES_TO_TOTAL',
+                // 'COUNT_UP_STEPS_TO_TOTAL'
+            ]
+        });
 
         this.doneButton = node.widgets.append('DoneButton', header, {
             text: 'Next'
@@ -174,23 +180,23 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         width: '100%',
                         type: 'text',
                         requiredChoice: true,
-                        validation: function(value) {
-                            var res;
-                            value = value.trim();
-                            res = { value: value };
-
-                            if (value === '' && this.requiredChoice) {
-                                res.err = this.getText('emptyErr');
-                                return res;
-                            }
-
-                            // Custom validation (only reports about last word).
-                            if (!J.inArray(value, node.game.states)) {
-                                res.err = 'Invalid state: ' + value;
-                            }
-
-                            return res;
-                    }
+                        // validation: function(value) {
+                        //     var res;
+                        //     value = value.trim();
+                        //     res = { value: value };
+                        //
+                        //     if (value === '' && this.requiredChoice) {
+                        //         res.err = this.getText('emptyErr');
+                        //         return res;
+                        //     }
+                        //
+                        //     // Custom validation (only reports about last word).
+                        //     if (!J.inArray(value, node.game.states)) {
+                        //         res.err = 'Invalid state: ' + value;
+                        //     }
+                        //
+                        //     return res;
+                        // }
                     },
                     {
                         name: 'CustomInput',
@@ -527,6 +533,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     //////////////////////////////////////////////////////////////////////////
     // Page 9. Nr household members + HH INCOME
     stager.extendStep('q9', {
+        init: function() {
+            parent.scrollTo(0,0);
+        },
         cb: function() {
             // // Modify CSS rules on the fly.
             // W.cssRule('.choicetable-left, .choicetable-right ' +
