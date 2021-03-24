@@ -19,10 +19,15 @@ module.exports = function(stager, settings) {
           .step('q2')
           .step('q3')
           .step('q4')
-
-        .repeat('game', settings.ROUNDS)
-           .step('guess')
-           .step('results')
+          .step('q5')
+          .step('q6')
+          .step('q7')
+          .step('q8')
+          .step('q9')
+          .step('q10')
+          .step('q11')
+          .step('q12')
+          .step('q13')
 
         .stage('end')
 
@@ -32,7 +37,6 @@ module.exports = function(stager, settings) {
     // stager.skip('instructions');
 
     // To skip a step within a stage use:
-    stager.skip('instructions');
-    stager.skip('game');
+    //stager.skip('instructions');
     // Notice: here all stages have just one step.
 };
