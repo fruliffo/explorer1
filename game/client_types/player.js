@@ -237,13 +237,32 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'ChoiceTable',
                         id: 'ImpProb',
-                        orientation: 'V',
+                        orientation: 'H',
+                        // Number of choices per row/column.
+                        choicesSetSize: 2,
                         mainText: 'In your opinion, which are the TWO most serious PROBLEMS India is facing currently?', //Which of the following problems do you consider to be the TWO most serious ones for India currently?' ,
                         //choices: [ 'People living in poverty and need','Discrimination against girls and women','Poor sanitation and infectious diseases','Inadequate education','Environmental pollution','Unemployment','Personal safety','Corruption','Ethnic/religious tensions'],
-                        choices: [ 'Poverty','Discrimination against girls and women','Poor sanitation and infectious diseases','Inadequate education','Environmental pollution','Unemployment','Corruption','Ethnic/religious tensions'],
-                        shuffleChoices: true,
+                        choices: [ 'Poverty','Discrimination against women','Poor sanitation and infectious diseases','Inadequate education','Environmental pollution','Corruption','Other'],
+                        shuffleChoices: false,
                         requiredChoice: 2,
                         selectMultiple: 2,
+                        onclick: function(value, removed) {
+                            var w, forms, len;
+                            forms = node.widgets.lastAppended.formsById
+                            len = forms.ImpProb.choices.length - 1;
+                            w = forms.otherlanguage;
+                            if (this.isChoiceCurrent(len)) w.show();
+                            else w.hide();
+                            W.adjustFrameHeight();
+                        }
+                    },
+                    {
+                        name: 'CustomInput',
+                        id: 'otherProb',
+                        mainText: 'Please name it.',
+                        width: '100%',
+                        hidden: true,
+                        requiredChoice: true,
                     },
                 ],
             }
@@ -267,7 +286,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'EnvVsGrowth',
                         orientation: 'V',
                         mainText: 'Here are two statements people sometimes make when discussing the ENVIRONMENT and ECONOMIC GROWTH. <br><br>' +
-                        'Which of them comes closer to your own point of view?',
+                        'Which statement better describes your own opinion?',
                         choices: [
                             '<strong>Protecting the environment</strong> should be given priority, even if it causes slower economic growth and some loss of jobs.',
                             '<strong>Economic growth and creating jobs</strong> should be the top priority, even if the environment suffers to some extent.'],
@@ -291,12 +310,21 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             options: {
                 mainText: '<strong>Below are two pairs of opposing statements. For each pair, please specify which statement you agree more with.</strong>',
                 forms: [
+                    // {
+                    //     name: 'ChoiceTable',
+                    //     id: 'ImpProb',
+                    //     orientation: 'V',
+                    //     mainText: 'Pair 1 <br/> A: Incomes should be made more equal.<br/> B: We need larger income differences as incentives for individual effort',
+                    //     choices: [ 'I strongly agree with A.','I somewhat agree with A.','I somewhat agree with B.','I strongly agree with B.'],
+                    //     shuffleChoices: false,
+                    //     requiredChoice: true,
+                    // },
                     {
                         name: 'ChoiceTable',
                         id: 'ImpProb',
                         orientation: 'V',
-                        mainText: 'Pair 1 <br/> A: Incomes should be made more equal.<br/> B: We need larger income differences as incentives for individual effort',
-                        choices: [ 'I strongly agree with A.','I somewhat agree with A.','I somewhat agree with B.','I strongly agree with B.'],
+                        mainText: 'Pair 1',
+                        choices: [ 'Incomes should be made more equal.','We need larger income differences as incentives for individual effort'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -304,8 +332,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'GovResp',
                         orientation: 'V',
-                        mainText:'Pair 2 <br/> X: The Goverment should take more responsibility to ensure that everyone is provided for.<br/> Y:  People should take more responsibility to provide for themselves.',
-                        choices: [ 'I strongly agree with X.','I would rather agree with X than with Y.','I would rather agree with Y than with X.','I strongly agree with Y.'],
+                        mainText:'Pair 2',
+                        choices: [ 'The Government should take more responsibility to ensure that everyone is provided for.',' People should take more responsibility to provide for themselves.'],
                         requiredChoice: true
                     },
                 ],
@@ -328,7 +356,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'ChoiceTable',
                         id: 'PollProtYN',
-                        orientation: 'V',
+                        orientation: 'H',
                         mainText: 'Do you usually take any protective measures against air pollution?',
                         choices: [ 'No','Yes'],
                         shuffleChoices: false,
@@ -348,7 +376,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollProtWhich',
                         orientation: 'V',
                         mainText: 'Which protective measure do you usually use?',
-                        choices: [ 'I wear a breathing mask','I avoid spending time outdoors in polluted areas','I use an air purifier at home','I use an air purifier at work','Another practice'],
+                        choices: [ 'I wear a breathing mask','I avoid spending time outdoors in polluted areas','I use an air purifier at home','I use an air purifier at work','Another measure'],
                         shuffleChoices: false,
                         selectMultiple: 5,
                         requiredChoice: true,
@@ -406,7 +434,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q8',
             options: {
-                mainText: '<strong>Below is a list of a number of organizations. For each one, could you specify how much <em>confidence</em> you have in them: is it a great deal of confidence, quite a lot of confidence, not very much confidence or none at all?</strong>',
+                mainText: '<strong>Below is a list of organizations. For each one, could you specify how much <em>confidence</em> you have in them?</strong>',
                 forms: [
                     {
                         name: 'ChoiceTable',
@@ -417,15 +445,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         shuffleChoices: false,
                         requiredChoice: true
                     },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'Army',
-                        orientation: 'H',
-                        mainText: 'The armed forces' ,
-                        choices: ['A great deal','Quite a lot','Not very much','None at all'],
-                        shuffleChoices: false,
-                        requiredChoice: true
-                    },
+                    // {
+                    //     name: 'ChoiceTable',
+                    //     id: 'Army',
+                    //     orientation: 'H',
+                    //     mainText: 'The armed forces' ,
+                    //     choices: ['A great deal','Quite a lot','Not very much','None at all'],
+                    //     shuffleChoices: false,
+                    //     requiredChoice: true
+                    // },
                     {
                         name: 'ChoiceTable',
                         id: 'Press',
@@ -444,24 +472,24 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         shuffleChoices: false,
                         requiredChoice: true
                     },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'Unions',
-                        orientation: 'H',
-                        mainText: 'The labor unions' ,
-                        choices: ['A great deal','Quite a lot','Not very much','None at all'],
-                        shuffleChoices: false,
-                        requiredChoice: true
-                    },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'Police',
-                        orientation: 'H',
-                        mainText: 'The police' ,
-                        choices: ['A great deal','Quite a lot','Not very much','None at all'],
-                        shuffleChoices: false,
-                        requiredChoice: true
-                    },
+                    // {
+                    //     name: 'ChoiceTable',
+                    //     id: 'Unions',
+                    //     orientation: 'H',
+                    //     mainText: 'The labor unions' ,
+                    //     choices: ['A great deal','Quite a lot','Not very much','None at all'],
+                    //     shuffleChoices: false,
+                    //     requiredChoice: true
+                    // },
+                    // {
+                    //     name: 'ChoiceTable',
+                    //     id: 'Police',
+                    //     orientation: 'H',
+                    //     mainText: 'The police' ,
+                    //     choices: ['A great deal','Quite a lot','Not very much','None at all'],
+                    //     shuffleChoices: false,
+                    //     requiredChoice: true
+                    // },
                     {
                         name: 'ChoiceTable',
                         id: 'Courts',
@@ -489,15 +517,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         shuffleChoices: false,
                         requiredChoice: req
                     },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'PolParties',
-                        orientation: 'H',
-                        mainText: 'The political parties' ,
-                        choices: ['A great deal','Quite a lot','Not very much','None at all'],
-                        shuffleChoices: false,
-                        requiredChoice: req
-                    },
+                    // {
+                    //     name: 'ChoiceTable',
+                    //     id: 'PolParties',
+                    //     orientation: 'H',
+                    //     mainText: 'The political parties' ,
+                    //     choices: ['A great deal','Quite a lot','Not very much','None at all'],
+                    //     shuffleChoices: false,
+                    //     requiredChoice: req
+                    // },
                     {
                         name: 'ChoiceTable',
                         id: 'University',
@@ -511,7 +539,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'NGO',
                         orientation: 'H',
-                        mainText: 'The non-governmental institutions (NGOs)' ,
+                        mainText: 'The non-governmental organizations (NGOs)' ,
                         choices: ['A great deal','Quite a lot','Not very much','None at all'],
                         shuffleChoices: false,
                         requiredChoice: req
@@ -571,7 +599,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'V',
                         mainText: '<strong>In 2020, what was the annual income in your household?</strong>',
                         hint: 'Please refer to the SUM of income of ALL members living in the same household as you in 2020.',
-                        choices: [ 'Less than 5,000 USD', '5,000 - 7,500 USD', '7,500 - 10,000 USD', '10,000 - 12,500 USD', '12,500 - 15,000 USD', '15,000 - 25,000 USD','25,000 - 40,000 USD','40,000 - 60,000 USD','60,000 - 75,000 USD','More than 75,000 USD'],
+                        choices: [ 'Less than 5,000 USD', '5,000 - 7,500 USD', '7,500 - 10,000 USD', '10,000 - 12,500 USD', '12,500 - 15,000 USD', '15,000 - 25,000 USD','25,000 - 50,000 USD','More than 50,000 USD'],
                         shuffleChoices: false,
                         requiredChoice: req
                     },
@@ -603,7 +631,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'Language',
                         orientation: 'V',
                         mainText: 'What is the highest educational level that you have completed?',
-                        choices: ['No formal education','Primary school','Secondary school','Vocational school','University'],
+                        choices: ['No formal education','Primary school','Secondary school','Vocational training','University'],
                         shuffleChoices: false,
                         requiredChoice: req
                     },
@@ -657,14 +685,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'age',
                         mainText: 'What is your age group?',
-                        choices: [ '18-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71+', 'Prefer not to disclose'],
+                        choices: [ '18-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71+'],
                         requiredChoice: req
                     },
                     {
                         name: 'ChoiceTable',
                         id: 'gender',
                         mainText: 'What is your gender?',
-                        choices: [ 'Female', 'Male', 'Other', 'Prefer not to disclose' ],
+                        choices: [ 'Female', 'Male', 'Other'],
                         requiredChoice: req
                     }
                 ],
@@ -730,7 +758,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'ChoiceTable',
                         id: 'InternetConn',
-                        mainText: 'How happy are you with the internet connection you usually use for MTurk?',
+                        mainText: 'How happy are you with your usual internet connection?',
                         orientation: 'V',
                         choices: [ 'Extremely dissatisfied', 'Somewhat dissatisfied', 'Neither satisfied nor dissatisfied', 'Somewhat satisfied', 'Extremely satisfied'],
                         shuffleChoices: false,
