@@ -28,6 +28,7 @@ module.exports = function(stager, settings) {
           .step('q11')
           .step('q12')
           .step('q13')
+          .step('q14')
 
         .stage('end')
 

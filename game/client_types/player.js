@@ -33,14 +33,16 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         W.generateFrame();
 
         // Add widgets.
-        this.visuaStage = node.widgets.append('VisualStage', header);
-
-        this.visualRound = node.widgets.append('VisualRound', header, {
-            displayMode: [
-                'COUNT_UP_STAGES_TO_TOTAL',
-                // 'COUNT_UP_STEPS_TO_TOTAL'
-            ]
+        this.visuaStage = node.widgets.append('VisualStage', header, {
+            next: false
         });
+
+        // this.visualRound = node.widgets.append('VisualRound', header, {
+        //     displayMode: [
+        //         'COUNT_UP_STAGES_TO_TOTAL',
+        //         // 'COUNT_UP_STEPS_TO_TOTAL'
+        //     ]
+        // });
 
         this.doneButton = node.widgets.append('DoneButton', header, {
             text: 'Next'
@@ -101,7 +103,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'Language',
                         orientation: 'H',
                         mainText: 'Which languages do you feel most comfortable to answer a HIT in?',
-                        // hint: 'Choose max two:',
+                        hint: '(Select 1 or 2 languages)',
                         choices: [ 'Assamese','Bengali','Bodo','Dogri','English',
                         'Gujarati','Hindi','Kannada','Kashmiri','Konkani',
                         'Maithili','Malayalam','Marathi','Mora','Meitei','Nepali',              'Odia','Punjabi','Sanskrit','Santali','Sindhi','Tamil',
@@ -250,7 +252,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             var w, forms, len;
                             forms = node.widgets.lastAppended.formsById
                             len = forms.ImpProb.choices.length - 1;
-                            w = forms.otherlanguage;
+                            w = forms.otherProb;
                             if (this.isChoiceCurrent(len)) w.show();
                             else w.hide();
                             W.adjustFrameHeight();
@@ -299,7 +301,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 6. Gov versus self
+    // Page 6. Income DISTRIBUTION
     stager.extendStep('q6', {
         cb: function() {
         },
@@ -308,33 +310,19 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q6',
             options: {
-                mainText: '<strong>Below are two pairs of opposing statements. For each pair, please specify which statement you agree more with.</strong>',
+                mainText: '',
                 forms: [
-                    // {
-                    //     name: 'ChoiceTable',
-                    //     id: 'ImpProb',
-                    //     orientation: 'V',
-                    //     mainText: 'Pair 1 <br/> A: Incomes should be made more equal.<br/> B: We need larger income differences as incentives for individual effort',
-                    //     choices: [ 'I strongly agree with A.','I somewhat agree with A.','I somewhat agree with B.','I strongly agree with B.'],
-                    //     shuffleChoices: false,
-                    //     requiredChoice: true,
-                    // },
                     {
                         name: 'ChoiceTable',
-                        id: 'ImpProb',
+                        id: 'IncomeDist',
                         orientation: 'V',
-                        mainText: 'Pair 1',
-                        choices: [ 'Incomes should be made more equal.','We need larger income differences as incentives for individual effort'],
-                        shuffleChoices: false,
-                        requiredChoice: true,
-                    },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'GovResp',
-                        orientation: 'V',
-                        mainText:'Pair 2',
-                        choices: [ 'The Government should take more responsibility to ensure that everyone is provided for.',' People should take more responsibility to provide for themselves.'],
-                        requiredChoice: true
+                        mainText: 'Here are two statements people sometimes make when discussing INCOME DISTRIBUTION. <br><br>' +
+                        'Which statement better describes your own opinion?',
+                        choices: [
+                            'Incomes should be made more equal.',
+                            'We need larger income differences as incentives for individual effort.'],
+                        shuffleChoices: true,
+                        requiredChoice: req
                     },
                 ],
             }
@@ -342,7 +330,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 7. Pollution protection
+    // Page 7. Gov versus self
     stager.extendStep('q7', {
         cb: function() {
         },
@@ -350,6 +338,35 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         widget: {
             name: 'ChoiceManager',
             id: 'q7',
+            options: {
+                mainText: '',
+                forms: [
+                    {
+                        name: 'ChoiceTable',
+                        id: 'GovSup',
+                        orientation: 'V',
+                        mainText: 'Here are two statements people sometimes make when discussing GOVERNMENT SUPPORT. <br><br>' +
+                        'Which statement better describes your own opinion?',
+                        choices: [
+                            'The Government should take more responsibility to ensure that everyone is provided for.',
+                            'People should take more responsibility to provide for themselves.'],
+                        shuffleChoices: true,
+                        requiredChoice: req
+                    },
+                ],
+            }
+        }
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // Page 8. Pollution protection
+    stager.extendStep('q8', {
+        cb: function() {
+        },
+        // Make a widget step.
+        widget: {
+            name: 'ChoiceManager',
+            id: 'q8',
             options: {
                 mainText: '',
                 forms: [
@@ -407,8 +424,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 8. Trust
-    stager.extendStep('q8', {
+    // Page 9. Trust
+    stager.extendStep('q9', {
         cb: function() {
             // // Modify CSS rules on the fly.
             // W.cssRule('.choicetable-left, .choicetable-right ' +
@@ -432,9 +449,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q8',
+            id: 'q9',
             options: {
-                mainText: '<strong>Below is a list of organizations. For each one, could you specify how much <em>confidence</em> you have in them?</strong>',
+                mainText: '<strong>Below is a list of organizations. For each one, how much <em>confidence</em> do you have in them?</strong>',
                 forms: [
                     {
                         name: 'ChoiceTable',
@@ -559,8 +576,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 9. Nr household members + HH INCOME
-    stager.extendStep('q9', {
+    // Page 10. Nr household members + HH INCOME
+    stager.extendStep('q10', {
         init: function() {
             parent.scrollTo(0,0);
         },
@@ -579,15 +596,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q9',
+            id: 'q10',
             options: {
                 mainText: '',
                 forms: [
                     {
                         name: 'CustomInput',
                         id: 'NrHH',
-                        mainText: 'How many people reside in your household?',
-                        hint: ('Answer should include yourself in the count.'),
+                        mainText: 'How many people reside in your household?<br>',
+                        hint: '(Answer should include yourself in the count.)',
                         width: '100%',
                         type: 'int',
                         requiredChoice: true,
@@ -597,8 +614,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'HHIncome',
                         orientation: 'V',
-                        mainText: '<strong>In 2020, what was the annual income in your household?</strong>',
-                        hint: 'Please refer to the SUM of income of ALL members living in the same household as you in 2020.',
+                        mainText: '<strong>In 2020, what was the annual income of your household?</strong><br>',
+                        hint: '(Please refer to the SUM of income of ALL members living in the same household as you in 2020.)',
                         choices: [ 'Less than 5,000 USD', '5,000 - 7,500 USD', '7,500 - 10,000 USD', '10,000 - 12,500 USD', '12,500 - 15,000 USD', '15,000 - 25,000 USD','25,000 - 50,000 USD','More than 50,000 USD'],
                         shuffleChoices: false,
                         requiredChoice: req
@@ -609,8 +626,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 10. Education
-    stager.extendStep('q10', {
+    // Page 11. Education
+    stager.extendStep('q11', {
         cb: function() {
             // // Modify CSS rules on the fly.
             // W.cssRule('.choicetable-left, .choicetable-right ' +
@@ -622,7 +639,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q10',
+            id: 'q11',
             options: {
                 mainText: '',
                 forms: [
@@ -640,8 +657,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-    // Page 11: Age and gender
-    stager.extendStep('q11', {
+//////////////////////////////////////////////////////////////////////////
+    // Page 12: Age and gender
+    stager.extendStep('q12', {
         cb: function() {
             // // Modify CSS rules on the fly.
             // W.cssRule('.choicetable-left, .choicetable-right ' +
@@ -677,7 +695,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q11',
+            id: 'q12',
             options: {
                 mainText: '',
                 forms: [
@@ -705,8 +723,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 12. MTurk frequency
-    stager.extendStep('q12', {
+    // Page 13. MTurk frequency
+    stager.extendStep('q13', {
         cb: function() {
             // // Modify CSS rules on the fly.
             // W.cssRule('.choicetable-left, .choicetable-right ' +
@@ -720,7 +738,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q12',
+            id: 'q13',
             options: {
                 mainText: '',
                 forms: [
@@ -739,8 +757,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 13. Internet connection
-    stager.extendStep('q13', {
+    // Page 14. Internet connection
+    stager.extendStep('q14', {
         cb: function() {
             // // Modify CSS rules on the fly.
             // W.cssRule('.choicetable-left, .choicetable-right ' +
@@ -752,7 +770,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q13',
+            id: 'q14',
             options: {
                 forms: [
                     {
