@@ -728,7 +728,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'V',
                         mainText: 'In your home, how do you reduce your own exposure to air pollution?<br>',
                         hint: '(Select all that apply.)',
-                        choices: ['I do not do anything in particular.', 'The windows are frequently opened to ventilate.','An air purifier or particle filter is usually on.','Other',,
+                        choices: ['I do not do anything in particular.', 'The windows are frequently opened to ventilate.','An air purifier or particle filter is usually on.','Other'],
                         selectMultiple: 3,
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -942,7 +942,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q16',
             options: {
-                mainText: 'Now consider the air pollution levels in your city. For each of the following aspects, how severe do you think the effect of air pollution is for the people living in your city?',
+                mainText: 'Now consider the air pollution levels in your village or city. For each of the following aspects, how severe do you think the effect of air pollution is for the people living in your village or city?',
                 forms: [
                     {
                         name: 'ChoiceTable',
@@ -1054,7 +1054,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'ExposureComp',
                         orientation: 'H',
                         mainText: 'How do you rate your own exposure to air pollution compared to that of an average person in your locality?',
-                        choices: [ 'Much smaller','Small','About the same','Higher','Much higher','I don`t know'],
+                        choices: ['Much smaller','Small','About the same','Higher','Much higher','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
