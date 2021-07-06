@@ -523,7 +523,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'WorkWindows',
                         orientation: 'H',
                         mainText: 'In the room where you work, how often are the windows open?',
-                        choices: [ 'Most of the time','Rarely','Almost never'],
+                        choices: ['Almost never','Rarely','Most of the time'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         hidden: true,
@@ -672,7 +672,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'HOMEWindows',
                         orientation: 'H',
                         mainText: 'When you are at home, how often are the windows open?',
-                        choices: [ 'Most of the time','Rarely','Almost never'],
+                        choices: ['Almost never','Rarely','Most of the time','Does not apply'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -680,8 +680,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'HomeAC',
                         orientation: 'H',
-                        mainText: 'When you are at home, is there an air conditioner (AC) usually on?',
-                        choices: [ 'Yes','No'],
+                        mainText: 'When you are at home, how often is there an air conditioner (AC) usually on?',
+                        hint: '(Select "Does not apply" if there is no AC at home.)',
+                        choices: ['Almost never','Rarely','Most of the time','Does not apply'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -689,8 +690,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'HomeAP',
                         orientation: 'H',
-                        mainText: 'When you are at home, is there an air purifier usually on?',
-                        choices: [ 'Yes','No'],
+                        mainText: 'When you are at home, how often is there an air purifier usually on?',
+                        hint: '(Select "Does not apply" if there is no air purifier at home.)',
+                        choices: ['Almost never','Rarely','Most of the time','Does not apply'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -726,14 +728,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'V',
                         mainText: 'In your home, how do you reduce your own exposure to air pollution?<br>',
                         hint: '(Select all that apply.)',
-                        choices: [ 'The windows are frequently opened to ventilate.','An air purifier or particle filter is usually on.','Other','I do not do anything in particular.'],
+                        choices: ['I do not do anything in particular.', 'The windows are frequently opened to ventilate.','An air purifier or particle filter is usually on.','Other',,
                         selectMultiple: 3,
                         shuffleChoices: false,
                         requiredChoice: true,
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtection.choices.length - 2;
+                            len = forms.PollProtection.choices.length - 1;
                             w1 = forms.PollProtectionOther;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
@@ -775,14 +777,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'V',
                         mainText: 'At work, how to you reduce your own exposure to air pollution?<br>',
                         hint: '(Select all that apply.)',
-                        choices: [ 'Windows are frequently open to ventilate.','An air purifier or particle filter is usually on.','Other','I do not do anything in particular.'],
+                        choices: ['I do not do anything in particular.', 'Windows are frequently open to ventilate.','An air purifier or particle filter is usually on.','Other'],
                         selectMultiple: 3,
                         shuffleChoices: false,
                         requiredChoice: true,
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtectionWork.choices.length - 2;
+                            len = forms.PollProtectionWork.choices.length - 1;
                             w1 = forms.PollProtectionWorkOther;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
@@ -824,14 +826,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'V',
                         mainText: 'When you are outdoors, how you do to reduce your own exposure to air pollution?<br>',
                         hint: '(Select all that apply)',
-                        choices: [ 'I wear a face mask.','I avoid spending time outside when pollution is high.','I avoid cycling or walking near roads with heavy traffic.','Other','I do not do anything in particular.'],
+                        choices: ['I do not do anything in particular.','I wear a face mask.','I avoid spending time outside when pollution is high.','I avoid cycling or walking near roads with heavy traffic.','Other'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         selectMultiple: 5,
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtectionOut.choices.length - 2;
+                            len = forms.PollProtectionOut.choices.length - 1;
                             w1 = forms.PollProtectionOutOther;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
@@ -872,7 +874,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollutionGuess',
                         orientation: 'V',
                         mainText: 'The World Health Organization (WHO) recommends that air pollution levels as measured by concentrations of fine particulate matter (PM2.5) stay on average below 10 μg/m3. <br><br> According to your best guess, how do air pollution levels compare to the WHO recommended levels in your city? Select the answer that best completes the sentence below. <br><br>  "Pollution in my city is on average ... the WHO recommendation."<br>',
-                        choices: [ 'much lower than','a little bit lower than.','equal to','two times larger than','five times larger than','ten times larger than'],
+                        choices: [ 'much lower than','a little bit lower than.','equal to','two times larger than','five times larger than','ten times larger than','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
