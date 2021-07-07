@@ -1,11 +1,11 @@
 /**
- * # Logic type implementation of the game stages
- * Copyright(c) 2021 Anca <anca.balietti@gmail.com>
- * MIT Licensed
- *
- * http://www.nodegame.org
- * ---
- */
+* # Logic type implementation of the game stages
+* Copyright(c) 2021 Anca <anca.balietti@gmail.com>
+* MIT Licensed
+*
+* http://www.nodegame.org
+* ---
+*/
 
 "use strict";
 
@@ -37,62 +37,69 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             keepUpdated: true
         });
 
-        // Win.
-        memory.view('win').save('guess.csv', {
-            header: [
-                'session', 'player', 'round', 'greater', 'number', 'win'
-            ],
-            adapter: { number: 'randomnumber' },
-            keepUpdated: true
-        });
+        memory.sync();
 
-        // Update player's guess with information if he or she won.
-        memory.on('insert', (item) => {
-            if (node.game.isStep('guess', item.stage)) {
-                // Determine if player's guess is correct.
-                let greater = item.greater;
-                let r = J.randomInt(0, 10);
-                let win = (r > 5 && greater) || (r <= 5 && !greater);
-                item.randomnumber = r;
-                item.win = win;
-                // Update earnings if player won.
-                if (win) gameRoom.updateWin(item.player, settings.COINS);
+        memory.on('insert', item => {
+            if (item.forms) {
+                for (let f in item.forms) {
+                    if (item.forms.hasOwnProperty(f)) {
+                        item[f] = item.forms[f];
+                        delete item[f].id;
+                        delete item[f].isCorrect;
+                    }
+                }
+                delete item.forms;
             }
         });
 
-        node.on('get.result', function(msg) {
-            let item = memory.player[msg.from].last();
-            return {
-                greater: item.greater,
-                randomnumber: item.randomnumber,
-                win: item.win
-            };
-        });
-
-        node.on.data('done', function(msg) {
-
+        node.on.done('q25', function(msg) {
             let id = msg.from;
-            let step = node.game.getStepId(msg.stage);
 
-            if (step === 'results' &&
-                msg.stage.round === settings.ROUNDS) {
+            // Saves bonus file, and notifies player.
+            gameRoom.computeBonus({
+                append: true,
+                clients: [ id ],
+                amt: true
+            });
 
-                // Saves bonus file, and notifies player.
-                gameRoom.computeBonus({
-                    append: true,
-                    clients: [ id ]
-                });
+            let db = memory.player[id];
 
-                let db = memory.player[id];
-                // Select all 'done' items and save its time.
-                db.select('done').save('times.csv', {
-                    header: [
-                        'session', 'player', 'stage', 'step', 'round',
-                        'time', 'timeup'
-                    ],
-                    append: true
-                });
-            }
+            db.save('data.csv', {
+                header: 'all',
+                append: true,
+                objectLevel: 3,
+                flatten: true,
+                adapter: {
+                    isCorrect: false,
+                    id: false,
+                    order: false,
+                    group: false,
+                    done: false,
+                    timeup: false,
+                    stageId: false,
+                    stepId: false,
+                    'stage.stage': false,
+                    'stage.step': false,
+                    'stage.round': false,
+                    'order.0': false,
+                    'order.1': false,
+                    'order.2': false,
+                    'order.3': false,
+                    'order.4': false,
+                    'order.5': false,
+                    'order.6': false,
+                    'order.7': false
+                }
+            });
+
+            // Select all 'done' items and save its time.
+            db.select('done').save('times.csv', {
+                header: [
+                    'session', 'player', 'stage', 'step', 'round',
+                    'time', 'timeup'
+                ],
+                append: true
+            });
         });
     });
 
