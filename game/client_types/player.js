@@ -88,7 +88,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'Language',
+                        id: 'q1_1',
                         orientation: 'H',
                         mainText: 'Which languages do you feel most comfortable to use on mTurk?',
                         hint: '(Select 1 or 2 languages)',
@@ -104,8 +104,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.Language.choices.length - 1;
-                            w = forms.otherlanguage;
+                            len = forms.q1_1.choices.length - 1;
+                            w = forms.q1_2;
                             if (this.isChoiceCurrent(len)) w.show();
                             else w.hide();
                             W.adjustFrameHeight();
@@ -113,7 +113,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'otherlanguage',
+                        id: 'q1_2',
                         mainText: 'Please specify your language.',
                         width: '100%',
                         hidden: true,
@@ -121,7 +121,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'Hello',
+                        id: 'q1_3',
                         mainText: 'How do you say "Hello!" in the language you selected above?',
                         width: '100%',
                         requiredChoice: true,
@@ -145,7 +145,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'YearBirth',
+                        id: 'q2_1',
                         mainText: 'What is your year of birth?',
                         width: '100%',
                         type: 'int',
@@ -174,7 +174,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'State',
+                        id: 'q3_1',
                         mainText: 'Which STATE do you currently live in?',
                         width: '100%',
                         type: 'text',
@@ -182,7 +182,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'District',
+                        id: 'q3_2',
                         mainText: 'Which DISTRICT do you currently live in?',
                         width: '100%',
                         type: 'text',
@@ -190,7 +190,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'UrbRur',
+                        id: 'q3_3',
                         // orientation: 'V',
                         mainText: 'Do you live in a rural or an urban area?',
                         choices: ['Rural','Urban'],
@@ -199,7 +199,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'City',
+                        id: 'q3_4',
                         // orientation: 'V',
                         mainText: 'What is the name of your town/city or village?',
                         width: '100%',
@@ -208,7 +208,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'TimeSince',
+                        id: 'q3_5',
                         // orientation: 'V',
                         mainText: 'For how many YEARS have you been living here?',
                         width: '100%',
@@ -237,7 +237,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'ImpProb',
+                        id: 'q4_1',
                         orientation: 'H',
                         // Number of choices per row/column.
                         choicesSetSize: 2,
@@ -266,7 +266,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'EnvVsGrowth',
+                        id: 'q5_1',
                         orientation: 'V',
                         mainText: 'Here are two statements people sometimes make when discussing the ENVIRONMENT and ECONOMIC GROWTH. <br><br>' +
                         'Which statement better describes your own opinion?',
@@ -295,7 +295,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     forms: [
                         {
                             name: 'CustomInput',
-                            id: 'Indoor',
+                            id: 'q6_1',
                             mainText: 'During a typical week day, how many hours do you spend INDOORS?<br>',
                             hint: '(Think of all the time you are inside a building, for example at home, at work, visiting friends or relatives, including <em><strong>sleeping</strong></em> etc.)',
                             width: '100%',
@@ -306,7 +306,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         },
                         {
                             name: 'CustomInput',
-                            id: 'Outdoor',
+                            id: 'q6_2',
                             mainText: 'During a typical week day, how many hours do you spend OUTDOORS?<br>',
                             hint: '(Think of all the time you usually spend on the street, at the market, in parks, in front of your home or office, etc.)',
                             width: '100%',
@@ -335,7 +335,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     forms: [
                         {
                             name: 'ChoiceTable',
-                            id: 'Employed',
+                            id: 'q7_1',
                             orientation: 'H',
                             mainText: 'Are you currently employed?',
                             choices: [ 'No','Yes'],
@@ -344,8 +344,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             onclick: function(value, removed) {
                                 var w1, forms, len;
                                 forms = node.widgets.lastAppended.formsById
-                                len = forms.Employed.choices.length - 1;
-                                w1 = forms.CommuteYN;
+                                len = forms.q7_1.choices.length - 1;
+                                w1 = forms.q7_2;
                                 if (this.isChoiceCurrent(len)) {
                                     w1.show();
                                 }
@@ -357,7 +357,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         },
                         {
                             name: 'ChoiceTable',
-                            id: 'CommuteYN',
+                            id: 'q7_2',
                             orientation: 'H',
                             mainText: 'During a typical week day, do you have to commute to work?',
                             choices: [ 'No','Yes'],
@@ -367,11 +367,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             onclick: function(value, removed) {
                                 var w, w1, w2, forms, len, len2;
                                 forms = node.widgets.lastAppended.formsById
-                                len = forms.CommuteYN.choices.length - 1;
-                                len2 = forms.CommuteMeans.choices.length - 1;
-                                w = forms.CommuteTime;
-                                w1 = forms.CommuteMeans;
-                                w2 = forms.CommuteOther;
+                                len = forms.q7_2.choices.length - 1;
+                                len2 = forms.q7_2.choices.length - 1;
+                                w = forms.q7_3;
+                                w1 = forms.q7_4;
+                                w2 = forms.q7_5;
                                 if (this.isChoiceCurrent(len)) {
                                     w.show();
                                     w1.show();
@@ -387,7 +387,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         },
                         {
                             name: 'CustomInput',
-                            id: 'CommuteTime',
+                            id: 'q7_3',
                             mainText: 'How long does it usually take you to communte to your workplace?<br>',
                             hint: '(Please give your answer in number of <strong><em>minutes</em></strong> for a one way commute.)',
                             width: '100%',
@@ -398,7 +398,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         },
                         {
                             name: 'ChoiceTable',
-                            id: 'CommuteMeans',
+                            id: 'q7_4',
                             mainText: 'Which means of transportion do you typically use for your commute to work?<br>',
                             hint: '(Select <em><strong>all</strong></em> that apply.)',
                             choices: ['Walking','Bicycle','Auto rickshaw','Bus', 'Car','Other'],
@@ -409,8 +409,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             onclick: function(value, removed) {
                                 var w, forms, len;
                                 forms = node.widgets.lastAppended.formsById
-                                len = forms.CommuteMeans.choices.length - 1;
-                                w = forms.CommuteOther;
+                                len = forms.q7_4.choices.length - 1;
+                                w = forms.q7_5;
                                 if (this.isChoiceCurrent(len)) w.show();
                                 else w.hide();
                                 W.adjustFrameHeight();
@@ -418,7 +418,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         },
                         {
                             name: 'CustomInput',
-                            id: 'CommuteOther',
+                            id: 'q7_5',
                             mainText: 'Which other means of transportation do you normally use to commute to work?',
                             width: '100%',
                             hidden: true,
@@ -428,7 +428,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 }
             },
             done: function(values) {
-                node.game.isEmployed = values.forms.Employed.value;
+                node.game.isEmployed = values.forms.q7_1.value;
             }
         });
 
@@ -442,7 +442,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 node.done();
             }
             else {
-                node.widgets.lastAppended.formsById.WorkOutdoor.show();
+                node.widgets.lastAppended.formsById.q8_1.show();
             }
 
         },
@@ -455,7 +455,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'WorkOutdoor',
+                        id: 'q8_1',
                         orientation: 'H',
                         mainText: 'When you are at work, do you typically work outdoors?',
                         choices: [ 'Yes','No'],
@@ -465,11 +465,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, w2, w3, w4, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.WorkOutdoor.choices.length - 1;
-                            w1 = forms.WorkWindows;
-                            w2 = forms.WorkAC;
-                            w3 = forms.WorkAP;
-                            w4 = forms.WorkMask;
+                            len = forms.q8_1.choices.length - 1;
+                            w1 = forms.q8_2;
+                            w2 = forms.q8_3;
+                            w3 = forms.q8_4;
+                            w4 = forms.q8_5;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                                 w2.show();
@@ -487,7 +487,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'WorkMask',
+                        id: 'q8_5',
                         orientation: 'H',
                         mainText: 'When you work outside, how often do you wear a breathing mask?',
                         choices: ['Never', 'Rarely','Most of the time','Always'],
@@ -498,7 +498,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'WorkWindows',
+                        id: 'q8_2',
                         orientation: 'H',
                         mainText: 'In the room where you work, how often are the windows open?',
                         choices: ['Never','Rarely','Most of the time','Always'],
@@ -509,7 +509,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'WorkAC',
+                        id: 'q8_3',
                         orientation: 'H',
                         mainText: 'At work, is there an air conditioner (AC) usually on?',
                         choices: ['No', 'Yes'],
@@ -520,7 +520,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'WorkAP',
+                        id: 'q8_4',
                         orientation: 'H',
                         mainText: 'At work, is there an air purifier usually on?',
                         choices: ['No', 'Yes'],
@@ -548,7 +548,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'HomeTime',
+                        id: 'q9_1',
                         mainText: 'During a typical week day, how many hours do you spend at HOME?<br>',
                         hint: '(Your answer should include the hours spent  <em><strong>sleeping</strong></em>.)',
                         width: '100%',
@@ -559,7 +559,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'LightFuel',
+                        id: 'q9_2',
                         orientation: 'H',
                         mainText: 'What do you use as lighting fuel at home?<br>',
                         choices: [ 'Kerosene','Electricity','Solar lamp','Other'],
@@ -570,8 +570,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.LightFuel.choices.length - 1;
-                            w1 = forms.LightOther;
+                            len = forms.q9_2.choices.length - 1;
+                            w1 = forms.q9_3;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -583,7 +583,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'LightOther',
+                        id: 'q9_3',
                         mainText: 'Which other?',
                         width: '100%',
                         hidden: true,
@@ -591,7 +591,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'HomeFuel',
+                        id: 'q9_4',
                         orientation: 'H',
                         mainText: 'What do you use for cooking fuel at home?<br>',
                         choices: ['Dung cakes','Wood','Coal','Kerosene','Gas','Electric stove','Other'],
@@ -602,8 +602,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.HomeFuel.choices.length - 1;
-                            w1 = forms.FuelOther;
+                            len = forms.q9_4.choices.length - 1;
+                            w1 = forms.q9_5;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -615,7 +615,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'FuelOther',
+                        id: 'q9_5',
                         mainText: 'Which other?',
                         width: '100%',
                         hidden: true,
@@ -623,7 +623,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'Kitchen',
+                        id: 'q9_6',
                         orientation: 'V',
                         mainText: 'In your home, is cooking done in a separate room?',
                         choices: ['No, cooking is done in the main living area.','Yes, cooking is done in a separate kitchen.'],
@@ -649,7 +649,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'HOMEWindows',
+                        id: 'q10_1',
                         orientation: 'H',
                         mainText: 'When you are at HOME, how often are the windows open?',
                         choices: ['Never','Rarely','Most of the time','Does not apply'],
@@ -658,7 +658,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'HomeAC',
+                        id: 'q10_2',
                         orientation: 'H',
                         mainText: 'When you are at home, how often is there an air conditioner (AC) usually on?<br>',
                         hint: '(Select "Does not apply" if there is no AC at home.)',
@@ -668,7 +668,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'HomeAP',
+                        id: 'q10_3',
                         orientation: 'H',
                         mainText: 'When you are at home, how often is there an air purifier usually on?<br>',
                         hint: '(Select "Does not apply" if there is no air purifier at home.)',
@@ -678,7 +678,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'Smoking',
+                        id: 'q10_4',
                         orientation: 'H',
                         mainText: 'Do you smoke tobacco (cigarettes, hookah, bidi)?',
                         choices: [ 'Yes','No'],
@@ -704,7 +704,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProtection',
+                        id: 'q11_1',
                         orientation: 'V',
                         mainText: 'In your HOME, do you do something to reduce  your exposure to air pollution?<br>',
                         choices: ['No','Yes'],
@@ -713,8 +713,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtection.choices.length - 1;
-                            w1 = forms.PollProtectionWhat;
+                            len = forms.q11_1.choices.length - 1;
+                            w1 = forms.q11_2;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -726,7 +726,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'PollProtectionWhat',
+                        id: 'q11_2',
                         orientation: 'V',
                         mainText: 'What do you do to reduce your exposure to air pollution?<br>',
                         width: '100%',
@@ -737,7 +737,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProtectionAP',
+                        id: 'q11_3',
                         orientation: 'V',
                         mainText: 'Do you own an air purifier or particle filter?<br>',
                         choices: ['No','Yes'],
@@ -764,7 +764,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProtectionWork',
+                        id: 'q12_1',
                         orientation: 'V',
                         mainText: 'At WORK, how to you reduce your own exposure to air pollution?<br>',
                         hint: '(Select <em><strong>all</strong></em> that apply.)',
@@ -775,8 +775,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtectionWork.choices.length - 1;
-                            w1 = forms.PollProtectionWorkOther;
+                            len = forms.q12_1.choices.length - 1;
+                            w1 = forms.q12_2;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -788,7 +788,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'PollProtectionWorkOther',
+                        id: 'q12_2',
                         mainText: 'How else do you reduce your own exposure to air pollution at work?',
                         width: '100%',
                         hidden: true,
@@ -813,7 +813,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProtectionOut',
+                        id: 'q13_1',
                         orientation: 'H',
                         mainText: 'When you are OUTDOORS, do you do something to reduce your own exposure to air pollution?<br>',
                         //hint: '(Select all that apply)',
@@ -823,8 +823,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtectionOut.choices.length - 1;
-                            w1 = forms.PollProtectionOutWhat;
+                            len = forms.q13_1.choices.length - 1;
+                            w1 = forms.q13_2;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -836,7 +836,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProtectionOutWhat',
+                        id: 'q13_2',
                         orientation: 'V',
                         mainText: 'How?',
                         hint: '(Select <em><strong>all</strong></em> that apply)',
@@ -848,8 +848,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtectionOutWhat.choices.length - 1;
-                            w1 = forms.PollProtectionOther;
+                            len = forms.q13_2.choices.length - 1;
+                            w1 = forms.q13_3;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -861,7 +861,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'PollProtectionOther',
+                        id: 'q13_3',
                         mainText: 'Please specify.',
                         width: '100%',
                         hidden: true,
@@ -886,7 +886,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollutionGuess',
+                        id: 'q14_1',
                         orientation: 'V',
                         mainText: 'The World Health Organization (WHO) recommends that air pollution levels as measured by concentrations of fine particulate matter (PM2.5) stay on average below 10 μg/m3. <br><br> In your opinion, how do air pollution levels  in your city compare to the WHO recommended levels? Select the answer that best completes the sentence below. <br><br>  "Pollution in my city is on average ... the WHO recommendation."<br>',
                         choices: [ 'much lower than','a little bit lower than','equal to','a little bit higher than','much higer than','I don`t know'],
@@ -912,7 +912,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollutionSource',
+                        id: 'q15_1',
                         orientation: 'V',
                         mainText: 'Think about different ways to get information on current pollution levels. <br> Do you get information on pollution from any of the following sources?<br>',
                         hint: '(Select <em><strong>all</strong></em> that apply.)',
@@ -923,8 +923,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollutionSource.choices.length - 1;
-                            w1 = forms.SourceOther;
+                            len = forms.q15_1.choices.length - 1;
+                            w1 = forms.q15_2;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -936,7 +936,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'SourceOther',
+                        id: 'q15_2',
                         mainText: 'Which other source of pollution information?',
                         width: '100%',
                         hidden: true,
@@ -961,7 +961,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProd',
+                        id: 'q16_1',
                         orientation: 'H',
                         mainText: 'People`s PRODUCTIVITY at work and at home <br>',
                         //hint: '(For example, an increase in the number of sick days, a reduction in their physical endurance and their ability to concentrate.)',
@@ -971,7 +971,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollIncome',
+                        id: 'q16_2',
                         orientation: 'H',
                         mainText: 'People`s INCOME <br>',
                         //hint: '(For example, a loss of income due to sick days and lower productivity.)',
@@ -981,7 +981,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'Poll',
+                        id: 'q16_3',
                         orientation: 'H',
                         mainText: 'The vehicle TRAFFIC in your area  <br>',
                         //hint: '(For example, how facades of buildings and the sky are affected by it.)',
@@ -991,7 +991,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollBeauty',
+                        id: 'q16_4',
                         orientation: 'H',
                         mainText: 'The AESTHETIC value (beauty) of your city <br>',
                         //hint: '(For example, if facades of buildings get ruined, windows get dirty, the sky has a different color, etc.)',
@@ -1001,7 +1001,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollHealth',
+                        id: 'q16_5',
                         orientation: 'H',
                         mainText: 'People`s HEALTH <br>',
                         //hint: '(For example, lung and heart diseases, increased risk of premature death, and risks for unborn babies whose mothers are exposed to air pollution.)',
@@ -1028,7 +1028,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollHealthY',
+                        id: 'q17_1',
                         orientation: 'H',
                         mainText: 'Your HEALTH<br>',
                         //hint: '(Including lung and heart diseases, and increased risk of premature death.)',
@@ -1038,7 +1038,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollProdY',
+                        id: 'q17_2',
                         orientation: 'H',
                         mainText: 'Your PRODUCTIVITY at work and at home<br>',
                         //hint: '(Including sick days, physical endurance, and ability to concentrate.)',
@@ -1048,7 +1048,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PollIncomeY',
+                        id: 'q17_3',
                         orientation: 'H',
                         mainText: 'Your INCOME<br>',
                         //hint: '(Including loss of income due to sick days and lower productivity.)',
@@ -1076,7 +1076,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'ExposureComp',
+                        id: 'q18_1',
                         orientation: 'H',
                         mainText: 'How do you rate your own exposure to air pollution compared to that of an average person in your locality?',
                         choices: ['Much smaller','Small','About the same','Higher','Much higher','I don`t know'],
@@ -1102,7 +1102,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'MaskEffective',
+                        id: 'q19_1',
                         orientation: 'V',
                         mainText: 'In your opinion, how effective is wearing a clean breathing mask in reducing your exposure to air pollution when you are outside?',
                         choices: ['I don`t know','Completely ineffective','Not very effective','Somewhat effective','Very effective'],
@@ -1111,7 +1111,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'MaskCost',
+                        id: 'q19_2',
                         orientation: 'V',
                         mainText: 'In your situation, how costly would it be to purchase new breathing masks to wear all the time when you are outside?',
                         choices: ['I don`t know','Not too costly','Somewhat costly','Very costly'],
@@ -1137,7 +1137,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PurifEffective',
+                        id: 'q20_1',
                         orientation: 'V',
                         mainText: 'In your opinion, how effective is using an air purifier constantly in reducing your exposure to air pollution when you are indoors?',
                         choices: ['I don`t know','Completely ineffective','Not very effective','Somewhat effective','Very effective'],
@@ -1146,7 +1146,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'PurifCost',
+                        id: 'q20_2',
                         orientation: 'V',
                         mainText: 'In your situation, how costly would it be to purchase a new air purifier?',
                         choices: ['I don`t know','Not too costly','Somewhat costly','Very costly'],
@@ -1155,7 +1155,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'ElectrCost',
+                        id: 'q20_3',
                         orientation: 'V',
                         mainText: 'In your situation, how costly would it be to constantly use an air purifier that consumes electricity?',
                         choices: ['I don`t know','Not too costly','Somewhat costly','Very costly'],
@@ -1180,7 +1180,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'PurifEffective',
+                        id: 'q21_1',
                         mainText: 'Imagine a new technology was invented to filter out all pollution from the air in your city. <br> What PERCENTAGE of your yearly income would you be willing to give up so that your city could install this technology?<br>',
                         hint: '(Please give a <em><strong>percentage</em></strong> in the range 0-100%.)',
                         width: '100%',
@@ -1209,7 +1209,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'Subsidies',
+                        id: 'q22_1',
                         orientation: 'H',
                         mainText: 'Subsidies for gas stoves (LPG) and electricity for the poor',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1218,7 +1218,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'BurningBan',
+                        id: 'q22_2',
                         orientation: 'H',
                         mainText: 'Ban on burning agricultural residue',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1227,7 +1227,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'VehicleTax',
+                        id: 'q22_3',
                         orientation: 'H',
                         mainText: 'Higher vehicle registration taxes and road taxes',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1236,7 +1236,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'FuelTax',
+                        id: 'q22_4',
                         orientation: 'H',
                         mainText: 'Higher fuel taxes for vehicles',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1245,7 +1245,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'Trees',
+                        id: 'q22_5',
                         orientation: 'H',
                         mainText: 'Planting of trees in urban centers/green urban landscapes',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1254,7 +1254,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'WasteBan',
+                        id: 'q22_6',
                         orientation: 'H',
                         mainText: 'Ban on waste burning and strong enforcement with fines',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1263,7 +1263,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'Buses',
+                        id: 'q22_7',
                         orientation: 'H',
                         mainText: 'Better public transportation services',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1272,7 +1272,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'NoDrive',
+                        id: 'q22_8',
                         orientation: 'H',
                         mainText: 'Extension or introduction of no-drive days in your city or village',
                         choices: [ 'No support at all','Rather not support','Indifferent','Support a little','Strongly support'],
@@ -1298,7 +1298,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'NrHH',
+                        id: 'q23_1',
                         mainText: 'How many people usually live in your household?<br>',
                         hint: '(Answer should include yourself in the count.)',
                         width: '100%',
@@ -1308,7 +1308,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'HHIncome',
+                        id: 'q23_2',
                         orientation: 'V',
                         mainText: '<strong>In 2020, what was the annual income of your household?</strong><br>',
                         hint: '(Please refer to the SUM of income of ALL members living in the same household as you in 2020.)',
@@ -1336,7 +1336,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'Language',
+                        id: 'q24_1',
                         orientation: 'V',
                         mainText: 'What is the highest educational level that you have completed?',
                         choices: ['No formal education','Primary school','Secondary school','Vocational training','University'],
@@ -1368,14 +1368,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'age',
+                        id: 'q25_1',
                         mainText: 'What is your age group?',
                         choices: [ '18-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71+'],
                         requiredChoice: req
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'gender',
+                        id: 'q25_2',
                         mainText: 'What is your gender?',
                         choices: [ 'Female', 'Male', 'Other'],
                         requiredChoice: req
@@ -1403,15 +1403,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'ExposureComp',
-                        mainText: 'In your opinion, what PERCENTAGE of the population living in the same village/town/city as you do has a LOWER annual income?<br>',
+                        id: 'q26_1',
+                        mainText: 'In your opinion, what PERCENTAGE of the population living in your village/town/city has a LOWER annual income?<br>',
                         hint: 'Please give your answer as a PERCENTAGE in the 0 - 100 range. For example, if you think that 50% of the population has an annual income that is lower than yours, write "50".',
                         width: '100%',
                         type: 'int',
                         min: 0,
                         max: 100,
                         requiredChoice: true,
-                    },
+                    }
                 ]
             }
         }

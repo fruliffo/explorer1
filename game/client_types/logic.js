@@ -37,7 +37,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             keepUpdated: true
         });
 
-        memory.sync();
+        // memory.sync();
 
         memory.on('insert', item => {
             if (item.forms) {
@@ -52,7 +52,16 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             }
         });
 
-        node.on.done('q25', function(msg) {
+
+        // NEW VERSION
+        // node.on.done('q25', function(msg) {
+        // END NEW VERSION
+
+        // OLD VERSION.
+        node.on.data('done', function(msg) {
+            if (msg.stage.step !== 26) return;
+            // END OLD VERSION
+
             let id = msg.from;
 
             // Saves bonus file, and notifies player.
