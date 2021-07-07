@@ -39,7 +39,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         memory.sync();
 
-        node.on.done('end', function(msg) {
+        memory.on('insert', item => {
+            if (item.forms) {
+                for (let f in item.forms) {
+                    if (item.forms.hasOwnProperty(f)) {
+                        item[f] = item.forms[f];
+                        delete item[f].id;
+                        delete item[f].isCorrect;
+                    }
+                }
+                delete item.forms;
+            }
+        });
+
+        node.on.done('q25', function(msg) {
             let id = msg.from;
 
             // Saves bonus file, and notifies player.
@@ -51,7 +64,33 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
             let db = memory.player[id];
 
-            db.save('data.csv', { header: 'all', append: true });
+            db.save('data.csv', {
+                header: 'all',
+                append: true,
+                objectLevel: 3,
+                flatten: true,
+                adapter: {
+                    isCorrect: false,
+                    id: false,
+                    order: false,
+                    group: false,
+                    done: false,
+                    timeup: false,
+                    stageId: false,
+                    stepId: false,
+                    'stage.stage': false,
+                    'stage.step': false,
+                    'stage.round': false,
+                    'order.0': false,
+                    'order.1': false,
+                    'order.2': false,
+                    'order.3': false,
+                    'order.4': false,
+                    'order.5': false,
+                    'order.6': false,
+                    'order.7': false
+                }
+            });
 
             // Select all 'done' items and save its time.
             db.select('done').save('times.csv', {

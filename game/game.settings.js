@@ -34,12 +34,6 @@ module.exports = {
 
     // # Game specific properties
 
-    // Number of game rounds to repeat.
-    ROUNDS: 4,
-
-    // Number of coins available each round.
-    COINS: 1,
-
     // Exchange rate coins to dollars.
     EXCHANGE_RATE: 1,
 
