@@ -29,16 +29,10 @@ module.exports = {
      * used to initialize the game timer for the step.
      */
     TIMER: {
-        guess: 10000
+
     },
 
     // # Game specific properties
-
-    // Number of game rounds to repeat.
-    ROUNDS: 4,
-
-    // Number of coins available each round.
-    COINS: 1,
 
     // Exchange rate coins to dollars.
     EXCHANGE_RATE: 1,
@@ -54,12 +48,7 @@ module.exports = {
     treatments: {
 
         standard: {
-            description: "Longer time"
-        },
-
-        pressure: {
-            description: "Short times to take decisions",
-            guess: 5000
+            description: "No treatment"
         }
 
     }
