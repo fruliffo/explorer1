@@ -55,22 +55,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Additional debug information while developing the game.
         // this.debugInfo = node.widgets.append('DebugInfo', header)
 
-        this.states = [ '1', '2', '3' ];
     });
 
     stager.extendStep('instructions', {
-        frame: 'instructions.htm',
-        cb: function() {
-            var s;
-            // Note: we need to specify node.game.settings,
-            // and not simply settings, because this code is
-            // executed on the client.
-            s = node.game.settings;
-            // Replace variables in the instructions.
-            W.setInnerHTML('coins', s.COINS);
-            W.setInnerHTML('rounds', s.ROUNDS);
-            W.setInnerHTML('exchange-rate', (s.COINS * s.EXCHANGE_RATE));
-        }
+        frame: 'instructions.htm'
     });
 
     //////////////////////////////////////////////////////////////////////////
