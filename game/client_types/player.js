@@ -128,8 +128,16 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'otherlanguage',
                         mainText: 'Please specify your language.',
                         width: '100%',
-                        hidden: true
+                        hidden: true,
+                        requiredChoice: true,
                     },
+                    {
+                        name: 'CustomInput',
+                        id: 'Hello',
+                        mainText: 'How do you say "Hello!" in the language you selected above?',
+                        width: '100%',
+                        requiredChoice: true,
+                    }
                 ]
             }
         }
@@ -214,8 +222,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'CustomInput',
                         id: 'TimeSince',
                         // orientation: 'V',
-                        mainText: 'For how long have you been living here?',
-                        hint: '(in years)',
+                        mainText: 'For how many YEARS have you been living here?',
                         width: '100%',
                         type: 'int',
                         min: 0,
@@ -247,27 +254,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         // Number of choices per row/column.
                         choicesSetSize: 2,
                         mainText: 'In your opinion, which are the TWO most serious PROBLEMS India is facing currently?',
-                        choices: [ 'Poverty','Discrimination against women','Poor sanitation', 'Infectious diseases','Poor education','Environmental pollution','Corruption','Other'],
-                        shuffleChoices: false,
+                        choices: [ 'Poverty','Discrimination against women','Poor sanitation', 'Infectious diseases','Poor education','Environmental pollution','Corruption','Incompetent politicians'],
+                        shuffleChoices: true,
                         requiredChoice: 2,
                         selectMultiple: 2,
-                        onclick: function(value, removed) {
-                            var w, forms, len;
-                            forms = node.widgets.lastAppended.formsById
-                            len = forms.ImpProb.choices.length - 1;
-                            w = forms.otherProb;
-                            if (this.isChoiceCurrent(len)) w.show();
-                            else w.hide();
-                            W.adjustFrameHeight();
-                        }
-                    },
-                    {
-                        name: 'CustomInput',
-                        id: 'otherProb',
-                        mainText: 'Please name it.',
-                        width: '100%',
-                        hidden: true,
-                        requiredChoice: true,
                     },
                 ],
             }
@@ -319,7 +309,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             name: 'CustomInput',
                             id: 'Indoor',
                             mainText: 'During a typical week day, how many hours do you spend INDOORS?<br>',
-                            hint: '(Think of all the time you are inside a building, for example at home, at work, visiting friends or relatives, including sleeping etc.)',
+                            hint: '(Think of all the time you are inside a building, for example at home, at work, visiting friends or relatives, including <em><strong>sleeping</strong></em> etc.)',
                             width: '100%',
                             type: 'int',
                             min: 0,
@@ -330,7 +320,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             name: 'CustomInput',
                             id: 'Outdoor',
                             mainText: 'During a typical week day, how many hours do you spend OUTDOORS?<br>',
-                            hint: '(Think of all the time you usually spend on the street, in parks, in front of your home or office, etc.)',
+                            hint: '(Think of all the time you usually spend on the street, at the market, in parks, in front of your home or office, etc.)',
                             width: '100%',
                             type: 'int',
                             min: 0,
@@ -411,7 +401,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             name: 'CustomInput',
                             id: 'CommuteTime',
                             mainText: 'How long does it usually take you to communte to your workplace?<br>',
-                            hint: '(Please give your answer in number of minutes for a one way commute.)',
+                            hint: '(Please give your answer in number of <strong><em>minutes</em></strong> for a one way commute.)',
                             width: '100%',
                             type: 'int',
                             min: 0,
@@ -422,7 +412,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             name: 'ChoiceTable',
                             id: 'CommuteMeans',
                             mainText: 'Which means of transportion do you typically use for your commute to work?<br>',
-                            hint: '(Select all that apply.)',
+                            hint: '(Select <em><strong>all</strong></em> that apply.)',
                             choices: ['Walking','Bicycle','Auto rickshaw','Bus', 'Car','Other'],
                             shuffleChoices: false,
                             requiredChoice: true,
@@ -512,7 +502,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'WorkMask',
                         orientation: 'H',
                         mainText: 'When you work outside, how often do you wear a breathing mask?',
-                        choices: [ 'Most of the time','Rarely','Almost never'],
+                        choices: ['Never', 'Rarely','Most of the time','Always'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         hidden: true,
@@ -523,7 +513,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'WorkWindows',
                         orientation: 'H',
                         mainText: 'In the room where you work, how often are the windows open?',
-                        choices: ['Almost never','Rarely','Most of the time'],
+                        choices: ['Never','Rarely','Most of the time','Always'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         hidden: true,
@@ -534,7 +524,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'WorkAC',
                         orientation: 'H',
                         mainText: 'At work, is there an air conditioner (AC) usually on?',
-                        choices: [ 'Yes','No'],
+                        choices: ['No', 'Yes'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         hidden: true,
@@ -545,7 +535,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'WorkAP',
                         orientation: 'H',
                         mainText: 'At work, is there an air purifier usually on?',
-                        choices: [ 'Yes','No'],
+                        choices: ['No', 'Yes'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         hidden: true,
@@ -569,12 +559,23 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 mainText: '',
                 forms: [
                     {
+                        name: 'CustomInput',
+                        id: 'HomeTime',
+                        mainText: 'During a typical week day, how many hours do you spend at HOME?<br>',
+                        hint: '(Your answer should include the hours spent  <em><strong>sleeping</strong></em>.)',
+                        width: '100%',
+                        type: 'int',
+                        min: 0,
+                        max: 24,
+                        requiredChoice: true,
+                    },
+                    {
                         name: 'ChoiceTable',
                         id: 'LightFuel',
                         orientation: 'H',
                         mainText: 'What do you use as lighting fuel at home?<br>',
                         choices: [ 'Kerosene','Electricity','Solar lamp','Other'],
-                        hint: '(Select all that apply.)',
+                        hint: '(Select <em><strong>all</strong></em> that apply.)',
                         shuffleChoices: false,
                         selectMultiple: 4,
                         requiredChoice: true,
@@ -595,7 +596,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'CustomInput',
                         id: 'LightOther',
-                        mainText: 'Which other is your main fuel for lighting at home?',
+                        mainText: 'Which other?',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
@@ -606,7 +607,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'H',
                         mainText: 'What do you use for cooking fuel at home?<br>',
                         choices: ['Dung cakes','Wood','Coal','Kerosene','Gas','Electric stove','Other'],
-                        hint: '(Select all that apply.)',
+                        hint: '(Select <em><strong>all</strong></em> that apply.)',
                         selectMultiple: 7,
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -627,7 +628,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'CustomInput',
                         id: 'FuelOther',
-                        mainText: 'Which other is your main fuel for cooking at home?',
+                        mainText: 'Which other?',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
@@ -659,20 +660,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 mainText: '',
                 forms: [
                     {
-                        name: 'CustomInput',
-                        id: 'HomeTime',
-                        mainText: 'During a typical week day, how many hours do you spend at home?',
-                        width: '100%',
-                        min: 0,
-                        max: 24,
-                        requiredChoice: true,
-                    },
-                    {
                         name: 'ChoiceTable',
                         id: 'HOMEWindows',
                         orientation: 'H',
-                        mainText: 'When you are at home, how often are the windows open?',
-                        choices: ['Almost never','Rarely','Most of the time','Does not apply'],
+                        mainText: 'When you are at HOME, how often are the windows open?',
+                        choices: ['Never','Rarely','Most of the time','Does not apply'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -680,9 +672,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'HomeAC',
                         orientation: 'H',
-                        mainText: 'When you are at home, how often is there an air conditioner (AC) usually on?',
+                        mainText: 'When you are at home, how often is there an air conditioner (AC) usually on?<br>',
                         hint: '(Select "Does not apply" if there is no AC at home.)',
-                        choices: ['Almost never','Rarely','Most of the time','Does not apply'],
+                        choices: ['Never','Rarely','Most of the time','Does not apply'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -690,9 +682,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'HomeAP',
                         orientation: 'H',
-                        mainText: 'When you are at home, how often is there an air purifier usually on?',
+                        mainText: 'When you are at home, how often is there an air purifier usually on?<br>',
                         hint: '(Select "Does not apply" if there is no air purifier at home.)',
-                        choices: ['Almost never','Rarely','Most of the time','Does not apply'],
+                        choices: ['Never','Rarely','Most of the time','Does not apply'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -726,17 +718,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'PollProtection',
                         orientation: 'V',
-                        mainText: 'In your home, how do you reduce your own exposure to air pollution?<br>',
-                        hint: '(Select all that apply.)',
-                        choices: ['I do not do anything in particular.', 'The windows are frequently opened to ventilate.','An air purifier or particle filter is usually on.','Other'],
-                        selectMultiple: 3,
+                        mainText: 'In your HOME, do you do something to reduce  your exposure to air pollution?<br>',
+                        choices: ['No','Yes'],
                         shuffleChoices: false,
                         requiredChoice: true,
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
                             len = forms.PollProtection.choices.length - 1;
-                            w1 = forms.PollProtectionOther;
+                            w1 = forms.PollProtectionWhat;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -748,12 +738,25 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'PollProtectionOther',
-                        mainText: 'How else do you reduce your own exposure to air pollution at home?',
+                        id: 'PollProtectionWhat',
+                        orientation: 'V',
+                        mainText: 'What do you do to reduce your exposure to air pollution?<br>',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
-                    }
+                        //hint: '(Select all that apply.)',
+                        //choices: ['The windows are frequently opened to ventilate.','An air purifier or particle filter is usually on.','Other'],
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'PollProtectionAP',
+                        orientation: 'V',
+                        mainText: 'Do you own an air purifier or particle filter?<br>',
+                        choices: ['No','Yes'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                        hidden: false,
+                    },
                 ]
             }
         }
@@ -775,9 +778,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'PollProtectionWork',
                         orientation: 'V',
-                        mainText: 'At work, how to you reduce your own exposure to air pollution?<br>',
-                        hint: '(Select all that apply.)',
-                        choices: ['I do not do anything in particular.', 'Windows are frequently open to ventilate.','An air purifier or particle filter is usually on.','Other'],
+                        mainText: 'At WORK, how to you reduce your own exposure to air pollution?<br>',
+                        hint: '(Select <em><strong>all</strong></em> that apply.)',
+                        choices: ['I don`t do anything in particular.', 'Windows are frequently open to ventilate.','An air purifier or particle filter is usually on.','Other'],
                         selectMultiple: 3,
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -823,18 +826,42 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'ChoiceTable',
                         id: 'PollProtectionOut',
-                        orientation: 'V',
-                        mainText: 'When you are outdoors, how you do to reduce your own exposure to air pollution?<br>',
-                        hint: '(Select all that apply)',
-                        choices: ['I do not do anything in particular.','I wear a face mask.','I avoid spending time outside when pollution is high.','I avoid cycling or walking near roads with heavy traffic.','Other'],
+                        orientation: 'H',
+                        mainText: 'When you are OUTDOORS, do you do something to reduce your own exposure to air pollution?<br>',
+                        //hint: '(Select all that apply)',
+                        choices:['No','Yes'],
                         shuffleChoices: false,
                         requiredChoice: true,
-                        selectMultiple: 5,
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
                             len = forms.PollProtectionOut.choices.length - 1;
-                            w1 = forms.PollProtectionOutOther;
+                            w1 = forms.PollProtectionOutWhat;
+                            if (this.isChoiceCurrent(len)) {
+                                w1.show();
+                            }
+                            else {
+                                w1.hide();
+                            }
+                            W.adjustFrameHeight();
+                        }
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'PollProtectionOutWhat',
+                        orientation: 'V',
+                        mainText: 'How?',
+                        hint: '(Select <em><strong>all</strong></em> that apply)',
+                        choices: ['I wear a face mask.','I avoid spending time outside when pollution is high.','I avoid cycling or walking near roads with heavy traffic.','Other'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                        selectMultiple: 4,
+                        hidden: true,
+                        onclick: function(value, removed) {
+                            var w1, forms, len;
+                            forms = node.widgets.lastAppended.formsById
+                            len = forms.PollProtectionOutWhat.choices.length - 1;
+                            w1 = forms.PollProtectionOther;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -846,8 +873,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'PollProtectionOutOther',
-                        mainText: 'How else do you reduce your own exposure to air pollution when you are outside?',
+                        id: 'PollProtectionOther',
+                        mainText: 'Please specify.',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
@@ -873,8 +900,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'PollutionGuess',
                         orientation: 'V',
-                        mainText: 'The World Health Organization (WHO) recommends that air pollution levels as measured by concentrations of fine particulate matter (PM2.5) stay on average below 10 μg/m3. <br><br> According to your best guess, how do air pollution levels compare to the WHO recommended levels in your city? Select the answer that best completes the sentence below. <br><br>  "Pollution in my city is on average ... the WHO recommendation."<br>',
-                        choices: [ 'much lower than','a little bit lower than.','equal to','two times larger than','five times larger than','ten times larger than','I don`t know'],
+                        mainText: 'The World Health Organization (WHO) recommends that air pollution levels as measured by concentrations of fine particulate matter (PM2.5) stay on average below 10 μg/m3. <br><br> In your opinion, how do air pollution levels  in your city compare to the WHO recommended levels? Select the answer that best completes the sentence below. <br><br>  "Pollution in my city is on average ... the WHO recommendation."<br>',
+                        choices: [ 'much lower than','a little bit lower than','equal to','a little bit higher than','much higer than','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -899,16 +926,16 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'PollutionSource',
                         orientation: 'V',
-                        mainText: 'Think about different ways to get information on current events. <br> From which of the following sources do you get information on current pollution levels in your city or village?<br>',
-                        hint: '(Select all that apply.)',
-                        choices: [ 'Newspapers','Radio','Television','Posters and leaflets around the city/village','Discussions with family and friends','My own searches online','A mobile app','Other','None'],
-                        selectMultiple: 7,
+                        mainText: 'Think about different ways to get information on current pollution levels. <br> Do you get information on pollution from any of the following sources?<br>',
+                        hint: '(Select <em><strong>all</strong></em> that apply.)',
+                        choices: ['None','Newspapers','Radio','Television','Posters and leaflets around the city/village','Discussions with family and friends','My own searches online','A mobile app','Other'],
+                        selectMultiple: 9,
                         shuffleChoices: false,
                         requiredChoice: true,
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.PollProtectionWork.choices.length - 2;
+                            len = forms.PollutionSource.choices.length - 1;
                             w1 = forms.SourceOther;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
@@ -946,20 +973,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'PollHealth',
-                        orientation: 'H',
-                        mainText: 'People`s HEALTH <br>',
-                        hint: '(Such as lung and heart diseases, increased risk of premature death, and risks for unborn babies whose mothers are exposed to air pollution.)',
-                        choices: [ 'Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
-                        shuffleChoices: false,
-                        requiredChoice: true,
-                    },
-                    {
-                        name: 'ChoiceTable',
                         id: 'PollProd',
                         orientation: 'H',
                         mainText: 'People`s PRODUCTIVITY at work and at home <br>',
-                        hint: '(Including sick days, physical endurance, and ability to concentrate.)',
+                        //hint: '(For example, an increase in the number of sick days, a reduction in their physical endurance and their ability to concentrate.)',
                         choices: [ 'Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -969,8 +986,18 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollIncome',
                         orientation: 'H',
                         mainText: 'People`s INCOME <br>',
-                        hint: '(Including loss of income due to sick days and lower productivity.)',
+                        //hint: '(For example, a loss of income due to sick days and lower productivity.)',
                         choices: [ 'Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'Poll',
+                        orientation: 'H',
+                        mainText: 'The vehicle TRAFFIC in your area  <br>',
+                        //hint: '(For example, how facades of buildings and the sky are affected by it.)',
+                        choices: ['Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -979,11 +1006,21 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollBeauty',
                         orientation: 'H',
                         mainText: 'The AESTHETIC value (beauty) of your city <br>',
-                        hint: '(Including how facades of buildings and the sky are affected by it.)',
+                        //hint: '(For example, if facades of buildings get ruined, windows get dirty, the sky has a different color, etc.)',
                         choices: ['Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
-                    }
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'PollHealth',
+                        orientation: 'H',
+                        mainText: 'People`s HEALTH <br>',
+                        //hint: '(For example, lung and heart diseases, increased risk of premature death, and risks for unborn babies whose mothers are exposed to air pollution.)',
+                        choices: [ 'Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                    },
                 ]
             }
         }
@@ -1006,7 +1043,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollHealthY',
                         orientation: 'H',
                         mainText: 'Your HEALTH<br>',
-                        hint: '(Including lung and heart diseases, and increased risk of premature death.)',
+                        //hint: '(Including lung and heart diseases, and increased risk of premature death.)',
                         choices: ['Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -1016,7 +1053,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollProdY',
                         orientation: 'H',
                         mainText: 'Your PRODUCTIVITY at work and at home<br>',
-                        hint: '(Including sick days, physical endurance, and ability to concentrate.)',
+                        //hint: '(Including sick days, physical endurance, and ability to concentrate.)',
                         choices: ['Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -1026,7 +1063,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'PollIncomeY',
                         orientation: 'H',
                         mainText: 'Your INCOME<br>',
-                        hint: '(Including loss of income due to sick days and lower productivity.)',
+                        //hint: '(Including loss of income due to sick days and lower productivity.)',
                         choices: ['Close to zero','Small','Somewhat severe','Severe','Extremely severe','I don`t know'],
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -1156,8 +1193,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'CustomInput',
                         id: 'PurifEffective',
-                        mainText: 'Imagine a new technology was invented to filter out all pollution from the air in your city. <br> How much of your yearly income would you be willing to give up so that your city could install this technology?<br>',
-                        hint: '(Please give a percentage in the range 0-100%.)',
+                        mainText: 'Imagine a new technology was invented to filter out all pollution from the air in your city. <br> What PERCENTAGE of your yearly income would you be willing to give up so that your city could install this technology?<br>',
+                        hint: '(Please give a <em><strong>percentage</em></strong> in the range 0-100%.)',
                         width: '100%',
                         type: 'int',
                         min: 0,
@@ -1364,7 +1401,33 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-
+    //////////////////////////////////////////////////////////////////////////
+    // Page 26. INCOME RANKING
+    stager.extendStep('q26', {
+        cb: function() {
+        },
+        // Make a widget step.
+        widget: {
+            name: 'ChoiceManager',
+            id: 'q26',
+            options: {
+                mainText: '<strong>Think about all the people living in the same village/town/city as you do.</strong> ',
+                forms: [
+                    {
+                        name: 'CustomInput',
+                        id: 'ExposureComp',
+                        mainText: 'In your opinion, what PERCENTAGE of the population living in the same village/town/city as you do has a LOWER annual income?<br>',
+                        hint: 'Please give your answer as a PERCENTAGE in the 0 - 100 range. For example, if you think that 50% of the population has an annual income that is lower than yours, write "50".',
+                        width: '100%',
+                        type: 'int',
+                        min: 0,
+                        max: 100,
+                        requiredChoice: true,
+                    },
+                ]
+            }
+        }
+    });
 
 
 
