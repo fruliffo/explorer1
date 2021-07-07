@@ -1,12 +1,12 @@
 /**
- * # Autoplay type implementation of the game stages
- * Copyright(c) 2021 Anca <anca.balietti@gmail.com>
- * MIT Licensed
- *
- * Handles automatic play.
- *
- * http://www.nodegame.org
- */
+* # Autoplay code
+* Copyright(c) 2021 Stefano Balietti
+* MIT Licensed
+*
+* Handles automatic play.
+*
+* http://www.nodegame.org
+*/
 
 const ngc =  require('nodegame-client');
 
@@ -15,7 +15,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Retrieve the player client type and rename its nodename property.
     let game = gameRoom.getClientType('player');
     game.nodename = 'autoplay';
-
     // Create a new stager based on the player client type.
     stager = ngc.getStager(game.plot);
 
@@ -23,39 +22,56 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // it performs an automatic choice, after the PLAYING even is fired.
     let origInit = stager.getOnInit();
     if (origInit) stager.setDefaultProperty('origInit', origInit);
-
     stager.setOnInit(function() {
-
         // Call the original init function, if found.
-        let origInit = node.game.getProperty('origInit');
+        var origInit = node.game.getProperty('origInit');
         if (origInit) origInit.call(this);
 
         // Auto play, depedending on the step.
         node.on('PLAYING', function() {
-            let id = node.game.getStepId();
+            var id = node.game.getStepId();
             node.timer.setTimeout(function() {
+                var res, w;
+                
+                w = node.widgets.lastAppended;
 
-                // Widget steps.
-                if (id === 'quiz') {
-                    // Auto-answer correctly survey widgets.
-                    node.widgets.lastAppended.setValues({ correct: true });
+                // Check if widget requires correct values.
+                if (w) {
+
+                    // Do not step if there is an EndScreen.
+                    if (w.widgetName === 'EndScreen') return;
+
+                    // Do not step if there is an EndScreen.
+                    w.setValues({ correct: true });
+                    if (w.widgetName === 'RiskGauge' && w.method === 'Bomb') {
+                        // The button isn't immediately enabled.
+                        node.timer.setTimeout(function() {
+                            w.panelDiv
+                                .querySelector('button.btn-danger').click();
+                                node.done();
+                        }, 100);
+                    } 
                 }
+                
+                // Try to step forward.
+                res = node.done();
+                if (res) return;
+                
+                // Custom steps.
 
-                if (id === 'guess') {
-                    node.timer.random.timeup();
-                }
 
-                // Call done in other stages, exept the last one.
-                else if (id !== 'end') {
-                    node.timer.random(2000).done();
-                }
+                // Try to step forward.
+                res = node.done();
+                if (res) return;
+                
 
-            }, 2000);
+
+
+            }, 1000);
         });
 
     });
 
-    // Return game object.
     game.plot = stager.getState();
     return game;
 };

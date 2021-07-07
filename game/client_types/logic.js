@@ -77,6 +77,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             if (step === 'results' &&
                 msg.stage.round === settings.ROUNDS) {
 
+            }
+        });
+
+	node.on.done('end', function(msg) {
+		
                 // Saves bonus file, and notifies player.
                 gameRoom.computeBonus({
                     append: true,
@@ -92,8 +97,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     ],
                     append: true
                 });
-            }
-        });
+	});
     });
 
     stager.setOnGameOver(function() {
