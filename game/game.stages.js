@@ -40,6 +40,9 @@ module.exports = function(stager, settings) {
           .step('q24')
           .step('q25')
           .step('q26')
+          .step('q27')
+          .step('q28')
+          .step('q29')
         .stage('end')
 
         .gameover();
