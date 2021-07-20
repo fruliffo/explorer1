@@ -1444,6 +1444,32 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
+    // FEEDBACK
+
+
+    stager.extendStep('feedback', {
+        widget: {
+            name: 'Feedback',
+            options: {
+                title: false,
+                panel: false,
+                minChars: 50,
+                showSubmit: false,
+                mainText: 'Thank you for participating. This was a pilot of ' +
+                    'the main study, therefore we are very interested in ' +
+                    'hearing your <strong>feedback</strong> about the ' +
+                    'following points:<br/><br/><em><ol>' +
+                    '<li>Was the survey too long or too short?</li>' +
+                    '<li>Did you feel you could express your opinion?</li>' +
+                    '<li>Did we leave out any important question?</li>' +
+                    '<li>Did you find any question unclear or ' +
+                    'uncomfortable?</li>' +
+                    '<li>Did you experience any technical difficulty?</li>' +
+                    '<li>How can we improve the study?</li></ol>'
+            }
+        }
+    });
+
 
     //////////////////////////////////////////////////////////////////////////////
     // END OF SURVEY

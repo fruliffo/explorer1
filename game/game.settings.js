@@ -37,6 +37,8 @@ module.exports = {
     // Exchange rate coins to dollars.
     EXCHANGE_RATE: 1,
 
+    BASE_PAY : 1.5,
+
     // # Treatments definition.
 
     // They can contain any number of properties, and also overwrite

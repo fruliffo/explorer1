@@ -25,12 +25,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     stager.setOnInit(function() {
 
-        // Feedback.
-        memory.view('feedback').save('feedback.csv', {
-            header: [ 'time', 'timestamp', 'player', 'feedback' ],
-            keepUpdated: true
-        });
-
         // Email.
         memory.view('email').save('email.csv', {
             header: [ 'timestamp', 'player', 'email' ],
@@ -59,7 +53,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         // OLD VERSION.
         node.on.data('done', function(msg) {
-            if (msg.stage.step !== 29) return;
+
+            if (!node.game.isStage('feedback', msg.stage)) return;
             // END OLD VERSION
 
             let id = msg.from;
@@ -68,21 +63,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             gameRoom.computeBonus({
                 append: true,
                 clients: [ id ],
-                amt: true
+                amt: true,
+                headerAdd: [ 'ip', 'userAgent' ],
+                showBonus: false
             });
 
             let db = memory.player[id];
-
-            // Add IP before saving data.
-            let ip = channel.registry.getClient(id);
-            if (ip) ip = ip.ip;
-            if (!ip) ip = 'NA';
-            db.add({
-                ip: ip,
-                player: id,
-                stage: msg.stage
-            });
-            // 
 
             db.save('data.csv', {
                 header: 'all',
