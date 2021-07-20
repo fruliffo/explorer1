@@ -89,7 +89,7 @@ module.exports = function(auth) {
     function decorateClientObj(clientObj, info) {
         if (info.headers) {
             clientObj.userAgent = info.headers['user-agent'];
-            clientObj.ip = info.header['x-real-ip'];
+            clientObj.ip = info.headers['x-real-ip'];
 
             // Behind proxy does not work.
             //clientObj.ip = info.handshake.address;
