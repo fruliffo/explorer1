@@ -16,7 +16,7 @@ module.exports = function(auth) {
 
     // auth.authorization('player', authPlayers);
     // auth.clientIdGenerator('player', idGen);
-    // auth.clientObjDecorator('player', decorateClientObj);
+    auth.clientObjDecorator('player', decorateClientObj);
 
     // All of them accept a variable number of parameters.
     // The first one specifies whether they apply only to
@@ -87,6 +87,9 @@ module.exports = function(auth) {
     // In this example the type of browser is added.
     //
     function decorateClientObj(clientObj, info) {
-        if (info.headers) clientObj.userAgent = info.headers['user-agent'];
+        if (info.headers) {
+            clientObj.userAgent = info.headers['user-agent'];
+        }
+        clientObj.ip = info.handshake.address;
     }
 };
