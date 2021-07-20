@@ -43,13 +43,16 @@ module.exports = function(stager, settings) {
           .step('q27')
           .step('q28')
           .step('q29')
+
+        .stage('feedback')
+
         .stage('end')
 
         .gameover();
 
 
     // Modify the stager to skip one stage.
-    //stager.skip('instructions');
+    // stager.skip('survey');
 
     // To skip a step within a stage use:
     //stager.skip('instructions');
