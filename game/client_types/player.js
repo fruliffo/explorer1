@@ -252,7 +252,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'q4_2',
                         // orientation: 'V',
                         mainText: 'What <em>other</em> serious problem do you think is missing from the list above?<br>',
-                        hint: "Feel free to write "Nothing" if you think all important problems have been mentioned above.",
+                        hint: "Feel free to write \"Nothing\" if you think all important problems have been mentioned above.",
                         width: '100%',
                         type: 'int',
                         min: 0,
@@ -864,7 +864,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'q15_1',
                         orientation: 'V',
                         //mainText: 'The World Health Organization (WHO) recommends that air pollution levels defined as concentrations of fine particulate matter (PM2.5) stay on average <em>below</em> 10 μg/m3. <br><br> In your opinion, how do air pollution levels  in your village/town/city compare to the WHO recommended levels for clean air? Select the answer that best completes the sentence below. <br><br>  "Pollution in my village/town/city is on average ... the WHO recommendation."<br>',
-                        mainText: "Think about the average air pollution levels in London, United Kingdom.<br> How much <em>lower</em> or <em>higher</em> do you think air pollution levels in your village/town/city are compared to those of London?".
+                        mainText: "Think about the average air pollution levels in London, United Kingdom.<br> How much <em>lower</em> or <em>higher</em> do you think air pollution levels in your village/town/city are compared to those of London (UK)?",
                         choices: [ 'much lower','a little bit lower','similar','a little bit higher','much higher',"I don't know"],
                         shuffleChoices: false,
                         requiredChoice: true,
