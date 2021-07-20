@@ -1449,7 +1449,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // END OF SURVEY
     //////////////////////////////////////////////////////////////////////////////
     stager.extendStep('end', {
-        widget: 'EndScreen',
+        widget: {
+            name: 'EndScreen',
+            options: {
+                feedback: false
+            }
+        },
         init: function() {
             node.game.doneButton.destroy();
         }
