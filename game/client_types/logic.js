@@ -59,7 +59,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         // OLD VERSION.
         node.on.data('done', function(msg) {
-            if (msg.stage.step !== 26) return;
+            if (msg.stage.step !== 29) return;
             // END OLD VERSION
 
             let id = msg.from;
@@ -72,6 +72,17 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             });
 
             let db = memory.player[id];
+
+            // Add IP before saving data.
+            let ip = channel.registry.getClient(id);
+            if (ip) ip = ip.ip;
+            if (!ip) ip = 'NA';
+            db.add({
+                ip: ip,
+                player: id,
+                stage: msg.stage
+            });
+            // 
 
             db.save('data.csv', {
                 header: 'all',
