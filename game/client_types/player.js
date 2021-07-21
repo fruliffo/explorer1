@@ -14,6 +14,7 @@
 "use strict";
 
 const ngc = require('nodegame-client');
+const J = ngc.JSUS;
 
 var req = false;
 
@@ -56,7 +57,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 node.game.pause('Disconnection detected. Please refresh ' +
                                 'to reconnect.');
                 alert('Disconnection detected. Please refresh the page ' +
-                      'to continue.');
+                      'to continue. You might have to use the original link provided on MTurk.');
             },
             connectCb: function() {
                 // If the user refresh the page, this is not called, it
@@ -284,8 +285,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         mainText: 'What <em>other</em> serious problem do you think is missing from the list above?<br>',
                         hint: "Feel free to write \"Nothing\" if you think all important problems have been mentioned above.",
                         width: '100%',
-                        type: 'int',
-                        min: 0,
                         requiredChoice: true
                     }
                 ],
@@ -785,7 +784,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         requiredChoice: true,
                         title: false,
                         panel: false,
-                        minChars: 50,
                         showSubmit: false
                     },
                 ]
@@ -894,12 +892,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'ChoiceTable',
                         id: 'q15_1',
-                        orientation: 'V',
                         //mainText: 'The World Health Organization (WHO) recommends that air pollution levels defined as concentrations of fine particulate matter (PM2.5) stay on average <em>below</em> 10 μg/m3. <br><br> In your opinion, how do air pollution levels  in your village/town/city compare to the WHO recommended levels for clean air? Select the answer that best completes the sentence below. <br><br>  "Pollution in my village/town/city is on average ... the WHO recommendation."<br>',
-                        mainText: "Think about the average air pollution levels in London, United Kingdom.<br> How much <em>lower</em> or <em>higher</em> do you think air pollution levels in your village/town/city are compared to those of London (UK)?",
-                        choices: [ 'much lower','a little bit lower','similar','a little bit higher','much higher',"I don't know"],
+                        //mainText: "Think about the average air pollution levels in London, United Kingdom.<br> How much <em>lower</em> or <em>higher</em> do you think air pollution levels in your village/town/city are compared to those of London (UK)?",
+                        mainText: "Think about the least and the most polluted cities in the world.<br/>How does your village/town/city rank on a scale from 1 to 7, where 1 means \"least polluted\" and 7 means \"most polluted\"?",
+                        choices: J.seq(1,7),
                         shuffleChoices: false,
                         requiredChoice: true,
+                        left: "Least Polluted",
+                        right: "Most Polluted"
                     },
                 ]
             }
