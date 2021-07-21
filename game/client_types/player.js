@@ -48,6 +48,23 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             text: 'Next'
         });
 
+        this.discBox = node.widgets.append('DisconnectBox', header, {
+            disconnectCb: function() {
+                W.init({
+                    waitScreen: true
+                });
+                node.game.pause('Disconnection detected. Please refresh ' +
+                                'to reconnect.');
+                alert('Disconnection detected. Please refresh the page ' +
+                      'to continue.');
+            },
+            connectCb: function() {
+                // If the user refresh the page, this is not called, it
+                // is a normal (re)connect.
+                if (node.game.isPaused()) node.game.resume();
+            }
+        });
+
         // No need to show the wait for other players screen in single-player
         // games.
         W.init({ waitScreen: false });
@@ -108,6 +125,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             w = forms.q1_2;
                             if (this.isChoiceCurrent(len)) w.show();
                             else w.hide();
+
+                            w = forms.q1_4;
+                            if (this.currentChoice.length === 2) w.show();
+                            else w.hide();
+
                             W.adjustFrameHeight();
                         }
                     },
@@ -124,6 +146,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         id: 'q1_3',
                         mainText: 'How do you say "Hello" in the language you selected above?<br>',
                         width: '100%',
+                        requiredChoice: true,
+                    },
+                    {
+                        name: 'CustomInput',
+                        id: 'q1_4',
+                        mainText: 'You selected two languages. How do you say "Hello" in the second language you selected above?<br>',
+                        width: '100%',
+                        hidden: true,
                         requiredChoice: true,
                     }
                 ]
