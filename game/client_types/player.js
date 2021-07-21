@@ -15,7 +15,7 @@
 
 const ngc = require('nodegame-client');
 
-var req = true;
+var req = false;
 
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
@@ -778,13 +778,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 mainText: '<em>Think about all the time you are OUTDOORS.<em>',
                 forms: [
                     {
-                        name: 'CustomInput',
+                        name: 'Feedback',
                         id: 'q11_1',
-                        orientation: 'V',
                         mainText: 'What can a person do to reduce their own exposure to pollution while being OUTDOORS?<br>',
                         hint: "Feel free to write <em>'Nothing'</em> if you think that one cannot do anything to reduce their own exposure to pollution while outdoors.",
-                        width: '100%',
                         requiredChoice: true,
+                        title: false,
+                        panel: false,
+                        minChars: 50,
+                        showSubmit: false
                     },
                 ]
             }
