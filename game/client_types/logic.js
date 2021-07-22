@@ -31,7 +31,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             keepUpdated: true
         });
 
-        // memory.sync();
+        memory.sync();
 
         memory.on('insert', item => {
             if (item.forms) {
@@ -70,33 +70,33 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
             let db = memory.player[id];
 
-            db.save('data.csv', {
-                header: 'all',
-                append: true,
-                objectLevel: 3,
-                flatten: true,
-                adapter: {
-                    isCorrect: false,
-                    id: false,
-                    order: false,
-                    group: false,
-                    done: false,
-                    timeup: false,
-                    stageId: false,
-                    stepId: false,
-                    'stage.stage': false,
-                    'stage.step': false,
-                    'stage.round': false,
-                    'order.0': false,
-                    'order.1': false,
-                    'order.2': false,
-                    'order.3': false,
-                    'order.4': false,
-                    'order.5': false,
-                    'order.6': false,
-                    'order.7': false
-                }
-            });
+            // db.save('data.csv', {
+            //     header: 'all',
+            //     append: true,
+            //     objectLevel: 3,
+            //     flatten: true,
+            //     adapter: {
+            //         isCorrect: false,
+            //         id: false,
+            //         order: false,
+            //         group: false,
+            //         done: false,
+            //         timeup: false,
+            //         stageId: false,
+            //         stepId: false,
+            //         'stage.stage': false,
+            //         'stage.step': false,
+            //         'stage.round': false,
+            //         'order.0': false,
+            //         'order.1': false,
+            //         'order.2': false,
+            //         'order.3': false,
+            //         'order.4': false,
+            //         'order.5': false,
+            //         'order.6': false,
+            //         'order.7': false
+            //     }
+            // });
 
             // Select all 'done' items and save its time.
             db.select('done').save('times.csv', {
