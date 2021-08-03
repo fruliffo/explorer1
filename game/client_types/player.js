@@ -146,14 +146,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'CustomInput',
                         id: 'q1_3',
-                        mainText: 'What is the name of the last thing you ate or drank today in the language you selected above?<br>',
+                        mainText: 'What is your favorite color? Write the answer in the language you selected above.<br>',
                         width: '100%',
                         requiredChoice: true,
                     },
                     {
                         name: 'CustomInput',
                         id: 'q1_4',
-                        mainText: 'You selected two languages. What is the name of the last thing you ate or drank today in the second language you selected above?<br>',
+                        mainText: 'You selected two languages. What is the name of your favorite color in the second language you selected above?<br>',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
@@ -226,7 +226,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         // orientation: 'V',
                         mainText: 'Do you live in a village or a town/city?',
                         choices: [ 'Village', 'Town/city'],
-                        shuffleChoices: false,
+                        shuffleChoices: true,
                         requiredChoice: true
                     },
                     {
@@ -334,7 +334,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                             name: 'ChoiceTable',
                             id: 'q5_2',
                             orientation: 'V',
-                            mainText: 'In which sector do you work?<br>',
+                            mainText: 'In which sector do you work?',
                             choices: ['Mining',
                             'Manufacturing',
                             'Electricty/water/gas/waste',
@@ -417,6 +417,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             }
             else {
                 node.widgets.lastAppended.formsById.q6_1.show();
+                node.widgets.lastAppended.formsById.q6_2.show();
             }
 
         },
@@ -465,19 +466,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 mainText: '',
                 forms: [
                     {
-                        name: 'CustomInput',
-                        id: 'q7_1',
-                        mainText: 'During a typical week day, how many hours do you spend at HOME?<br>',
-                        hint: '(Your answer should include the hours spent <em><strong>sleeping</strong></em>.)',
-                        width: '100%',
-                        type: 'int',
-                        min: 0,
-                        max: 24,
-                        requiredChoice: true,
-                    },
-                    {
                         name: 'ChoiceTable',
-                        id: 'q7_2',
+                        id: 'q7_1',
                         orientation: 'H',
                         mainText: 'What do you use as lighting fuel at home?<br>',
                         choices: [ 'Kerosene','Electricity','Gas','Solar lamp','Other'],
@@ -488,8 +478,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.q7_2.choices.length - 1;
-                            w1 = forms.q7_3;
+                            len = forms.q7_1.choices.length - 1;
+                            w1 = forms.q7_2;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -501,7 +491,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'q7_3',
+                        id: 'q7_2',
                         mainText: 'Which other?',
                         width: '100%',
                         hidden: true,
@@ -509,7 +499,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'q7_4',
+                        id: 'q7_3',
                         orientation: 'H',
                         mainText: 'What do you use for cooking fuel at home?<br>',
                         choices: ['Dung cakes','Wood','Coal','Kerosene','Gas','Electric stove','Other'],
@@ -520,8 +510,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.q7_4.choices.length - 1;
-                            w1 = forms.q7_5;
+                            len = forms.q7_3.choices.length - 1;
+                            w1 = forms.q7_4;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -533,7 +523,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'q7_5',
+                        id: 'q7_4',
                         mainText: 'Which other?',
                         width: '100%',
                         hidden: true,
@@ -541,11 +531,11 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'q7_6',
+                        id: 'q7_5',
                         orientation: 'V',
                         mainText: 'In your home, is cooking done in a separate room?',
                         choices: ['No, cooking is done in the main living area.','Yes, cooking is done in a separate kitchen.'],
-                        shuffleChoices: false,
+                        shuffleChoices: true,
                         requiredChoice: true,
                     }
                 ]
@@ -570,27 +560,27 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'q8_2',
+                        id: 'q8_1',
                         orientation: 'H',
                         mainText: 'Do you own an air conditioner (AC)?<br>',
                         choices: ['No','Yes'],
-                        shuffleChoices: false,
+                        shuffleChoices: true,
+                        requiredChoice: true,
+                        hidden: false,
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q8_2',
+                        orientation: 'H',
+                        mainText: 'Do you own an air purifier or particle filter?<br>',
+                        choices: ['No','Yes'],
+                        shuffleChoices: true,
                         requiredChoice: true,
                         hidden: false,
                     },
                     {
                         name: 'ChoiceTable',
                         id: 'q8_3',
-                        orientation: 'H',
-                        mainText: 'Do you own an air purifier or particle filter?<br>',
-                        choices: ['No','Yes'],
-                        shuffleChoices: false,
-                        requiredChoice: true,
-                        hidden: false,
-                    },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'q8_4',
                         orientation: 'H',
                         mainText: 'When you are home, do you do something to reduce your own exposure to air pollution?<br>',
                         choices:['No','Yes'],
@@ -599,8 +589,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         onclick: function(value, removed) {
                             var w1, forms, len;
                             forms = node.widgets.lastAppended.formsById
-                            len = forms.q8_4.choices.length - 1;
-                            w1 = forms.q8_5;
+                            len = forms.q8_3.choices.length - 1;
+                            w1 = forms.q8_4;
                             if (this.isChoiceCurrent(len)) {
                                 w1.show();
                             }
@@ -612,7 +602,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'CustomInput',
-                        id: 'q8_5',
+                        id: 'q8_4',
                         orientation: 'V',
                         mainText: 'What do you do to reduce air pollution in your home?<br>',
                         width: '100%',
@@ -634,12 +624,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q9',
             options: {
-                mainText: '<em>Think about all the time you are OUTDOORS.<em>',
+                mainText: '<em>Think about all the time you are OUTDOORS.<em><br> Think about all the time your are outside in the open air, for example on the street talking to people, going to the market, going for a walk, etc.',
                 forms: [
                     {
                         name: 'CustomInput',
                         id: 'q9_1',
-                        mainText: 'What can you do to reduce your own exposure to air pollution while being OUTDOORS?<br>',
+                        mainText: 'What can you do to reduce how pollution impacts you when you are OUTDOORS?<br>',
                         hint: "Write <em>'Nothing'</em> if there is nothing you can do to reduce your own exposure to air pollution while outdoors.",
                         requiredChoice: true,
                         width: '100%'
