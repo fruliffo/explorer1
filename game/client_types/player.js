@@ -38,12 +38,12 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             next: false
         });
 
-        // this.visualRound = node.widgets.append('VisualRound', header, {
-        //     displayMode: [
-        //         'COUNT_UP_STAGES_TO_TOTAL',
-        //         // 'COUNT_UP_STEPS_TO_TOTAL'
-        //     ]
-        // });
+        this.visualRound = node.widgets.append('VisualRound', header, {
+             displayMode: [
+                 //'COUNT_UP_STAGES_TO_TOTAL',
+                  'COUNT_UP_STEPS_TO_TOTAL'
+             ]
+         });
 
         this.doneButton = node.widgets.append('DoneButton', header, {
             text: 'Next'
@@ -146,14 +146,14 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'CustomInput',
                         id: 'q1_3',
-                        mainText: 'What is your favorite color? Write the answer in the language you selected above.<br>',
+                        mainText: 'What is your favorite color? Write the answer in the language you selected above.',
                         width: '100%',
                         requiredChoice: true,
                     },
                     {
                         name: 'CustomInput',
                         id: 'q1_4',
-                        mainText: 'You selected two languages. What is the name of your favorite color in the second language you selected above?<br>',
+                        mainText: 'You selected two languages. What is the name of your favorite color in the second language you selected above?',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
@@ -282,8 +282,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'CustomInput',
                         id: 'q4_2',
                         // orientation: 'V',
-                        mainText: 'What <em>other</em> serious problem do you think is missing from the list above?<br>',
-                        hint: "Feel free to write \"Nothing\" if you think all important problems have been mentioned above.",
+                        mainText: 'What <em>other</em> serious problem do you think is missing from the list above?',
                         width: '100%',
                         requiredChoice: false
                     }
@@ -297,6 +296,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Page 5. WORK: Commute
         stager.extendStep('q5', {
             cb: function() {
+                W.cssRule('table.choicetable { ' +
+                'border-collapse: separate; border-spacing: 10px }');
             },
             // Make a widget step.
             widget: {
@@ -333,7 +334,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         {
                             name: 'ChoiceTable',
                             id: 'q5_2',
-                            orientation: 'V',
+                            orientation: 'H',
+                            choicesSetSize: 2,
                             mainText: 'In which sector do you work?',
                             choices: ['Mining',
                             'Manufacturing',
@@ -419,7 +421,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 node.widgets.lastAppended.formsById.q6_1.show();
                 node.widgets.lastAppended.formsById.q6_2.show();
             }
-
+            W.cssRule('table.choicetable td { text-align: center !important; ' +
+            'font-weight: normal; padding-left: 10px; }');
         },
         // Make a widget step.
         widget: {
@@ -457,6 +460,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Page 7. HOME environment
     stager.extendStep('q7', {
         cb: function() {
+            W.cssRule('table.choicetable td { text-align: left !important; ' +
+            'font-weight: normal; padding-left: 10px; }');
         },
         // Make a widget step.
         widget: {
@@ -562,9 +567,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'q8_1',
                         orientation: 'H',
-                        mainText: 'Do you own an air conditioner (AC)?<br>',
+                        mainText: 'Do you own an air conditioner (AC)?',
                         choices: ['No','Yes'],
-                        shuffleChoices: true,
+                        shuffleChoices: false,
                         requiredChoice: true,
                         hidden: false,
                     },
@@ -572,17 +577,17 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'q8_2',
                         orientation: 'H',
-                        mainText: 'Do you own an air purifier or particle filter?<br>',
+                        mainText: 'Do you own an air purifier or particle filter?',
                         choices: ['No','Yes'],
-                        shuffleChoices: true,
+                        shuffleChoices: false,
                         requiredChoice: true,
-                        hidden: false,
+                        hidden: false
                     },
                     {
                         name: 'ChoiceTable',
                         id: 'q8_3',
                         orientation: 'H',
-                        mainText: 'When you are home, do you do something to reduce your own exposure to air pollution?<br>',
+                        mainText: 'When you are home, do you do something to reduce your own exposure to air pollution?',
                         choices:['No','Yes'],
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -604,7 +609,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'CustomInput',
                         id: 'q8_4',
                         orientation: 'V',
-                        mainText: 'What do you do to reduce air pollution in your home?<br>',
+                        mainText: 'What do you do to reduce air pollution in your home?',
                         width: '100%',
                         hidden: true,
                         requiredChoice: true,
@@ -624,13 +629,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q9',
             options: {
-                mainText: '<em>Think about all the time you are OUTDOORS.<em><br> Think about all the time your are outside in the open air, for example on the street talking to people, going to the market, going for a walk, etc.',
+                mainText: '<em>Think about all the time you are OUTDOORS, that is when you are outside in the open air, for example on the street talking to people, going to the market, going for a walk, etc.',
                 forms: [
                     {
                         name: 'CustomInput',
                         id: 'q9_1',
-                        mainText: 'What can you do to reduce how pollution impacts you when you are OUTDOORS?<br>',
-                        hint: "Write <em>'Nothing'</em> if there is nothing you can do to reduce your own exposure to air pollution while outdoors.",
+                        mainText: 'What can you do to reduce how pollution impacts you when you are OUTDOORS?',
+                        //hint: "Write <em>'Nothing'</em> if there is nothing you can do to reduce your own exposure to air pollution while outdoors.",
                         requiredChoice: true,
                         width: '100%'
                     },
@@ -655,8 +660,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'q10_1',
                         orientation: 'H',
-                        mainText: 'Air pollution is present only if you can see it.<br>',
-                        choices: ["I don't know",'I disagree','I agree'],
+                        mainText: '"Air pollution is present only if you can see it".',
+                        choices: ["I don't know",'Strongly disagree','Disagree','Neutral','Agree','Strongly agree'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     }
@@ -738,6 +743,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Page 13. Pollution information
     stager.extendStep('q13', {
         cb: function() {
+            W.cssRule('table.choicetable td { text-align: center !important; ' +
+            'font-weight: normal; padding-left: 10px; }');
         },
         // Make a widget step.
         widget: {
@@ -749,7 +756,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     {
                         name: 'ChoiceTable',
                         id: 'q13_1',
-                        mainText: "Think about the cities with the <strong>lowest air pollution</strong> and the city with the <strong>highest air pollution</strong> in the world.<br/>How does your village/town/city rank on a scale from 1 to 7, where 1 means \"lowest pollution\" and 7 means \"highest pollution\"?",
+                        mainText: "Think about the cities with the <strong>lowest air pollution</strong> and the city with the <strong>highest air pollution</strong> in the world.<br/><br> How does YOUR village/town/city rank on a scale from 1 to 7, where 1 means \"lowest pollution\" and 7 means \"highest pollution\"?",
                         choices: J.seq(1,7),
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -765,6 +772,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     // Page 14. Pollution IMPACTS on PEOPLE
     stager.extendStep('q14', {
         cb: function() {
+            W.cssRule('table.choicetable td { text-align: left !important; ' +
+            'font-weight: normal; padding-left: 10px; }');
         },
         // Make a widget step.
         widget: {
@@ -779,14 +788,53 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         orientation: 'V',
                         mainText:'Which parts of life are impacted by air pollution?',
                         hint: 'Select <em><strong>all</em></strong> that apply.',
-                        choices: ["Productivity at work or at home","Health","Body weight","Income","Food quality","School performance","Marriage/dating success","Civil violence","None"],
+                        choices: ["Productivity at work or at home","Health","Body weight","Income","Food quality","School performance","Marriage/dating success","Civil violence","None","Other"],
                         shuffleChoices: true,
                         requiredChoice: true,
-                        selectMultiple: 8
+                        selectMultiple: 8,
+                        onclick: function(value, removed) {
+                            var w1, forms, len;
+                            forms = node.widgets.lastAppended.formsById
+                            len = forms.q14_1.choices.length - 1;
+                            w1 = forms.q14_2;
+                            if (this.isChoiceCurrent(len)) {
+                                w1.show();
+                            }
+                            else {
+                                w1.hide();
+                            }
+                            W.adjustFrameHeight();
+                        }
                     },
                     {
-                        name: 'ChoiceTable',
+                        name: 'CustomInput',
                         id: 'q14_2',
+                        orientation: 'V',
+                        mainText: 'Please specify.',
+                        width: '100%',
+                        hidden: true,
+                        requiredChoice: true,
+                    }
+                ]
+            }
+        }
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // Page 15. Impact on your health
+    stager.extendStep('q15', {
+        cb: function() {
+        },
+        // Make a widget step.
+        widget: {
+            name: 'ChoiceManager',
+            id: 'q15',
+            options: {
+                mainText: '',
+                forms: [
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q15_1',
                         orientation: 'V',
                         mainText:'Think about YOUR everyday exposure to air pollution. In your situation, how large or small is the impact of air pollution on your HEALTH?',
                         choices: [ 'No impact','Small','Medium','Large','Extremely large',"I don't know"],
@@ -799,36 +847,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
 
-
-
     //////////////////////////////////////////////////////////////////////////
-    // Page 15. Pollution exposure comparison
-    stager.extendStep('q15', {
-        cb: function() {
-        },
-        // Make a widget step.
-        widget: {
-            name: 'ChoiceManager',
-            id: 'q15',
-            options: {
-                mainText: 'Think about your own exposure to air pollution compared to the xposure of other people living in your area. <br>- For example, some people work in outside and other people work in an office. <br>- Some people spend a lot of time in traffic during high pollution hours, others avoid it.',
-                forms: [
-                    {
-                        name: 'ChoiceTable',
-                        id: 'q15_1',
-                        orientation: 'H',
-                        mainText: 'How do you rate your own exposure to air pollution compared to the exposure of others in your village/town/city?',
-                        choices: ['Much smaller','A bit smaller','About the same','A bit higher','Much higher',"I don't know"],
-                        shuffleChoices: false,
-                        requiredChoice: true,
-                    },
-                ]
-            }
-        }
-    });
-
-    //////////////////////////////////////////////////////////////////////////
-    // Page 16. EFFECTIVENESS MASKS
+    // Page 16. Pollution exposure comparison
     stager.extendStep('q16', {
         cb: function() {
         },
@@ -837,23 +857,15 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q16',
             options: {
-                mainText: 'Think about a typical breathing mask.',
+                mainText: 'Think about your own exposure to air pollution compared to the exposure of other people living in your area. <br>- For example, some people work outside and other people work in an office. <br>- Some people spend a lot of time in traffic during high pollution hours, others avoid it.',
                 forms: [
                     {
                         name: 'ChoiceTable',
                         id: 'q16_1',
                         orientation: 'V',
-                        mainText: 'In your opinion, how <em>effective</em> is wearing a clean breathing mask in reducing your exposure to air pollution when you are outside?',
-                        choices: ["I don't know",'Completely ineffective','A little bit effective','Very effective'],
-                        shuffleChoices: false,
-                        requiredChoice: true,
-                    },
-                    {
-                        name: 'ChoiceTable',
-                        id: 'q16_2',
-                        orientation: 'V',
-                        mainText: 'In your situation, how <em>expensive</em> would it be to purchase breathing masks so you can wear a clean mask every time you go outside?',
-                        choices: ["I don't know",'Not expensive','A bit expensive','Very expensive'],
+                        //mainText: 'How do you rate your own exposure to air pollution compared to the exposure of others in your village/town/city?',
+                        mainText: "Compared to the people living in your village/town/city, are YOU more or less exposed to air pollution?",
+                        choices: ['I am much more exposed','I am a bit more exposed','I am exposed the same','I am a bit less exposed','I am much more exposed',"I don't know"],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -863,7 +875,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 17. EFFECTIVENESS AIR PURIFIERS
+    // Page 17. EFFECTIVENESS MASKS
     stager.extendStep('q17', {
         cb: function() {
         },
@@ -872,13 +884,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q17',
             options: {
-                mainText: 'Think about an air purifier or particle filter.',
+                mainText: 'Think about a typical face mask.',
                 forms: [
                     {
                         name: 'ChoiceTable',
                         id: 'q17_1',
                         orientation: 'V',
-                        mainText: 'In your opinion, how <em>effective</em> is using an air purifier in reducing your exposure to air pollution indoors?',
+                        mainText: 'In your opinion, how <em>effective</em> is wearing a clean face mask in reducing your exposure to air pollution when you are outside?',
                         choices: ["I don't know",'Completely ineffective','A little bit effective','Very effective'],
                         shuffleChoices: false,
                         requiredChoice: true,
@@ -887,8 +899,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'q17_2',
                         orientation: 'V',
-                        mainText: 'In your situation, how <em>expensive</em> would it be to purchase a new air purifier?',
-                        choices: ["I don't know",'Not expensive','A bit expensive','Very expensive'],
+                        mainText: 'How comfortable do you feel when wearing a face mask outside?',
+                        choices: ["Very uncomfortable",'A bit uncomfortable','A bit comfortable','Very comfortable'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -896,8 +908,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                         name: 'ChoiceTable',
                         id: 'q17_3',
                         orientation: 'V',
-                        mainText: 'In your situation, how expensive would it be to constantly use an air purifier that consumes electricity?',
-                        choices: ["I don't know",'Not expensive','A bit expensive','Very expensive'],
+                        mainText: 'Can you afford to purchase new face masks so you can wear a clean mask every time you go outside?<br>',
+						hint: 'The price of a new face mask is less than INR 5.',
+                        choices: ['Yes','Yes, but I think they are too expensive','No'],
                         shuffleChoices: false,
                         requiredChoice: true,
                     },
@@ -906,10 +919,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
-
-
     //////////////////////////////////////////////////////////////////////////
-    // Page 18. Worried about pollution
+    // Page 18. EFFECTIVENESS AIR PURIFIERS
     stager.extendStep('q18', {
         cb: function() {
         },
@@ -918,24 +929,43 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             name: 'ChoiceManager',
             id: 'q18',
             options: {
-                mainText: '<strong>Think about all the people in your network, such as family, friends, and coworkers.<strong>',
+                mainText: 'Think about an air purifier or particle filter.',
                 forms: [
                     {
                         name: 'ChoiceTable',
                         id: 'q18_1',
-                        orientation: 'H',
-                        mainText: 'How <em>worried</em> are the people in your network about air pollution in your village/town/city?<br>',
-                        choices: ["I don't know",'Not worried at all','A little worried','Very worried'],
+                        orientation: 'V',
+                        mainText: 'In your opinion, how <em>effective</em> is using an air purifier in reducing air pollution indoors?',
+                        choices: ['Completely ineffective','A little bit effective','Very effective',"I don't know"],
                         shuffleChoices: false,
                         requiredChoice: true,
-                    }
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q18_2',
+                        orientation: 'V',
+                        mainText: 'Can you afford to purchase a new air purifier?<br>',
+						hint: 'The cost of an air purifier is about INR 10,000 to INR 15,000.',
+                        choices: ['Yes', 'Yes, but I think it is too expensive', 'No'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q18_3',
+                        orientation: 'V',
+                        mainText: 'Can you afford to pay for the electricity that an air purifier consumes when it is constantly switched on?',
+                        choices: ['Yes', 'No', "I don't know"],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                    },
                 ]
             }
         }
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 19. Nr household members + HH INCOME
+    // Page 19. Pollution news
     stager.extendStep('q19', {
         cb: function() {
         },
@@ -947,8 +977,60 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 mainText: '',
                 forms: [
                     {
-                        name: 'CustomInput',
+                        name: 'ChoiceTable',
                         id: 'q19_1',
+                        orientation: 'H',
+                        mainText: 'How often do you read or hear news about air pollution in the place where you live?',
+                        choices: ["Never",'Less than once a month','A few times each month','Every week','Every day'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                    }
+                ]
+            }
+        }
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // Page 20. Worried about pollution
+    stager.extendStep('q20', {
+        cb: function() {
+        },
+        // Make a widget step.
+        widget: {
+            name: 'ChoiceManager',
+            id: 'q20',
+            options: {
+                mainText: '<strong>Think about all the people in your network, such as family, friends, and coworkers.<strong>',
+                forms: [
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q20_1',
+                        orientation: 'H',
+                        mainText: 'How <em>worried</em> are the people in your network about air pollution in your village/town/city?',
+                        choices: ["I don't know",'Not worried at all','A little worried','Very worried'],
+                        shuffleChoices: false,
+                        requiredChoice: true,
+                    }
+                ]
+            }
+        }
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // Page 21. Nr household members + HH INCOME
+    stager.extendStep('q21', {
+        cb: function() {
+        },
+        // Make a widget step.
+        widget: {
+            name: 'ChoiceManager',
+            id: 'q21',
+            options: {
+                mainText: '',
+                forms: [
+                    {
+                        name: 'CustomInput',
+                        id: 'q21_1',
                         mainText: 'How many people live in your household?<br>',
                         hint: '(Think about everyone that lives at least 8 month per year in your house. Answer should include yourself in the count.)',
                         width: '100%',
@@ -958,10 +1040,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'q19_2',
+                        id: 'q21_2',
                         orientation: 'V',
                         mainText: '<strong>In 2020, what was the annual income of your household?</strong><br>',
-                        hint: '(Please refer to the <strong>total income</strong> of ALL members living in your household in 2020.)',
+                        hint: 'Please refer to the <strong>total income</strong> of ALL members living in your household in 2020. By household annual income, we mean the total sum of incomes earned in your household in 2020, before any taxes or deductions. This includes wages and salaries from all jobs, pension income, any investment and business income, or unemployment benefits.',
                         //choices: [ 'Less than 5,000 USD', '5,000 - 7,500 USD', '7,500 - 10,000 USD', '10,000 - 12,500 USD', '12,500 - 15,000 USD', '15,000 - 25,000 USD','25,000 - 50,000 USD','More than 50,000 USD'],
                         choices: ['Less than 2,50,000 INR',' 2,50,000 INR – 5,00,000 INR','5,00,000 INR – 1,00,00,000 INR','1,00,00,000 INR – 1,50,00,000 INR','1,50,00,000 INR – 2,00,00,000 INR','2,00,00,000 INR – 3,00,00,000 INR','3,00,00,000 INR – 4,00,00,000 INR','4,00,00,000 INR or more'],
                         shuffleChoices: false,
@@ -973,20 +1055,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 20. Education
-    stager.extendStep('q20', {
+    // Page 22. Education
+    stager.extendStep('q22', {
         cb: function() {
         },
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q20',
+            id: 'q22',
             options: {
                 mainText: '',
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'q20_1',
+                        id: 'q22_1',
                         orientation: 'V',
                         mainText: 'What is the highest educational level that you have completed?',
                         choices: ['No formal education','Primary school','Secondary school','Vocational training','Bachelor degree University','Masters degree University','Doctoral degree','Professional Degree (JD, MD, MBA)'],
@@ -999,8 +1081,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 21: Age and gender
-    stager.extendStep('q21', {
+    // Page 23: Age and gender
+    stager.extendStep('q23', {
         cb: function() {
             W.cssRule('table.choicetable td { text-align: center !important; ' +
             'font-weight: normal; padding-left: 10px; }');
@@ -1012,20 +1094,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q21',
+            id: 'q23',
             options: {
                 mainText: '',
                 forms: [
                     {
                         name: 'ChoiceTable',
-                        id: 'q21_1',
+                        id: 'q23_1',
                         mainText: 'What is your age group?',
                         choices: [ '18-20', '21-30', '31-40', '41-50', '51-60', '61-70', '71+'],
                         requiredChoice: true
                     },
                     {
                         name: 'ChoiceTable',
-                        id: 'q21_2',
+                        id: 'q23_2',
                         mainText: 'What is your gender?',
                         choices: [ 'Female', 'Male', 'Other'],
                         requiredChoice: true
@@ -1040,20 +1122,20 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     //////////////////////////////////////////////////////////////////////////
-    // Page 22. INCOME RANKING
-    stager.extendStep('q22', {
+    // Page 24. INCOME RANKING
+    stager.extendStep('q24', {
         cb: function() {
         },
         // Make a widget step.
         widget: {
             name: 'ChoiceManager',
-            id: 'q22',
+            id: 'q24',
             options: {
                 mainText: '<strong>Think about all the people living in your village/town/city.</strong> ',
                 forms: [
                     {
                         name: 'CustomInput',
-                        id: 'q22_1',
+                        id: 'q24_1',
                         mainText: 'In your opinion, what PERCENTAGE of the population living in your village/town/city has a HIGHER annual income than you?<br>',
                         hint: 'Please give your answer as a PERCENTAGE (between 0 and 100).',
                         width: '100%',
@@ -1067,6 +1149,46 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         }
     });
 
+    //////////////////////////////////////////////////////////////////////////
+    // Page 25. Life satisfaction
+    stager.extendStep('q25', {
+        cb: function() {
+            W.cssRule('table.choicetable td { text-align: left !important; ' +
+            'font-weight: normal; padding-left: 10px; }');
+
+            // Speaces between choices.
+            W.cssRule('table.choicetable { ' +
+            'border-collapse: separate; border-spacing: 10px }');
+        },
+        // Make a widget step.
+        widget: {
+            name: 'ChoiceManager',
+            id: 'q25',
+            options: {
+                mainText: '',
+                forms: [
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q25_1',
+                        orientation: 'V',
+                        mainText: 'Taking all things together, would you say you are',
+                        choices: ['Very happy','Rather happy','Not very happy','Not at all happy'],
+                        shuffleChoices: false,
+                        requiredChoice: true
+                    },
+                    {
+                        name: 'ChoiceTable',
+                        id: 'q25_2',
+                        orientation: 'V',
+                        mainText: 'How healthy do you feel these days?',
+                        choices: ['Very healthy','Healthy','Neutral','A bit unhealthy','Very unhealthy'],
+                        shuffleChoices: false,
+                        requiredChoice: true
+                    },
+                ]
+            }
+        }
+    });
 
     // FEEDBACK
    stager.extendStep('feedback', {
