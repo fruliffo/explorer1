@@ -12,6 +12,7 @@
 module.exports = function(stager, settings) {
 
      stager
+        .stage('effort')
         .stage('instructions')
         .stage('survey')
           .step('q1')
