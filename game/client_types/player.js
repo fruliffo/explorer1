@@ -75,8 +75,108 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     });
 
+    stager.extendStep('effort_slider', {
+        donebutton: false,
+        frame: 'effort.html',
+        done: function() {
+            return { effort: node.game.correct };
+        },
+        exit: function() {
+            node.game.slider.destroy();
+            node.game.slider = null;
+            node.game.correct = null;
+        },
+        cb: function() {
+            // variable to count correct answer
+            var correct = 0;
+            node.game.correct = correct;
 
-    stager.extendStep('effort', {
+            var n = 0;
+            var m = 100; // Keep 100 else it does not work.
+
+            function genrand() {
+                var rnd = J.randomInt(n+10, m-9); // Avoid extremes.
+
+                // Find a random initial position not too close to target.
+                var initialValue = J.randomInt(n-1, m);
+                while (Math.abs(rnd - initialValue) < 20) {
+                    initialValue = J.randomInt(n-1, m);
+                }
+
+                if (node.game.slider) {
+                    // TODO: find a way to re-init instead of destroy.
+                    node.game.slider.destroy();
+                }
+                node.game.slider = node.widgets.append('Slider', 'input-div', {
+                    id: 'slider',
+                    mainText: 'Move the slider to position ' +
+                              '<span style="font-size: larger">' + rnd +
+                              '</span> and press submit.',
+                    type: 'flat', // or 'volume'
+                    min: n,
+                    max: m,
+                    initialValue: initialValue,
+                    correctValue: rnd,
+                    displayNoChange: false,
+                    required: true,
+                    texts: {
+                        currentValue: function(widget, value) {
+                            return '<strong>Position</strong>: ' + value;
+                        }
+                    }
+                });
+                // Fix bug.
+                node.game.slider.correctValue = rnd;
+
+            }
+
+            genrand(n, m);
+
+            var button;
+            button = W.gid('submitAnswer');
+            button.onclick = function() {
+                var values = node.game.slider.getValues();
+                var message1;
+                var message2;
+                
+                if (values.isCorrect) {
+                    message1 = 'The answer is <strong>correct</strong>.';
+                    node.game.correct += 1;
+                    message2 = 'So far, you had '+ node.game.correct
+                             + ' correct sliders.';
+                }
+                else {
+                    message1 = 'The answer is <strong>wrong</strong>.';
+                    message2 = 'So far, you had ' + node.game.correct +
+                               ' correct sliders.';
+                }
+    //                alert(message);
+                // Hide element with id above.
+                // Show element with id results.
+                // Set innerHTML property of element with id textresult to
+                // the value correct or wrong and how many table done so far.
+
+                // hint: W.show and W.hide
+                W.hide('above');
+                W.show('results');
+                W.setInnerHTML('CheckAnswer', message1);
+                W.setInnerHTML('TotalPoint', message2);
+                genrand(n, m);
+            };
+
+            var button2;
+            button2 = W.gid('nextTable');
+            button2.onclick = function() {
+                // Hide element with id results.
+                // Show element with id above.
+            W.hide('results');
+            W.show('above');
+            };
+        },
+
+    });
+
+    stager.extendStep('effort_count', {
         donebutton: false,
         frame: 'effort.html',
         done: function() {
@@ -85,6 +185,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         exit: function() {
             node.game.zero.destroy();
             node.game.zero = null;
+            node.game.correct = null;
         },
         cb: function() {
             var box = W.gid('box');
