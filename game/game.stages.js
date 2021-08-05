@@ -38,7 +38,7 @@ module.exports = function(stager, settings) {
           .step('q22')
           .step('q23')
           .step('q24')
-          // .step('q25')
+          .step('q25')
           // .step('q26')
           // .step('q27')
           // .step('q28')
