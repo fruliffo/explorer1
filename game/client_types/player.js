@@ -175,7 +175,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             button2 = W.gid('nextTable');
             button2.onclick = function() {
                 if (node.game.correct === 4) {
-                    node.done; return;
+                    node.done; return1;
                 }
                 // Hide element with id results.
                 // Show element with id above.
