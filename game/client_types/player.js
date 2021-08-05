@@ -76,7 +76,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('effort_slider', {
-        donebutton: false,
+        // donebutton: false,
         frame: 'effort.html',
         done: function() {
             return { effort: node.game.correct };
@@ -138,7 +138,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 var values = node.game.slider.getValues();
                 var message1;
                 var message2;
-                
+
                 if (values.isCorrect) {
                     message1 = 'The answer is <strong>correct</strong>.';
                     node.game.correct += 1;
@@ -177,7 +177,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('effort_count', {
-        donebutton: false,
+        // donebutton: false,
         frame: 'effort.html',
         done: function() {
             return { effort: node.game.correct };
