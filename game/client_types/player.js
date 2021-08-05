@@ -174,6 +174,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             var button2;
             button2 = W.gid('nextTable');
             button2.onclick = function() {
+                if (node.game.correct === 4) {
+                    node.done; return;
+                }
                 // Hide element with id results.
                 // Show element with id above.
             W.hide('results');
@@ -280,6 +283,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             var button2;
             button2 = W.gid('nextTable');
             button2.onclick = function() {
+                if (node.game.correct === 4) {
+                    node.done; return;
+                }
                 // Hide element with id results.
                 // Show element with id above.
             W.hide('results');
