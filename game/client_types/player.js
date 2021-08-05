@@ -75,6 +75,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     });
 
+
+    stager.extendStep('instructions', {
+        frame: 'instructions.htm'
+    });
+
+
+    // Effort task - Sliders
     stager.extendStep('effort_slider', {
         // donebutton: false,
         frame: 'effort.html',
@@ -176,6 +183,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     });
 
+    ///////////////////////////////////
+    // Effort task - Counting zeros
     stager.extendStep('effort_count', {
         // donebutton: false,
         frame: 'effort.html',
@@ -252,7 +261,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 }
                 else {
                     message1 = 'The answer is wrong.';
-                    message2='So far, you had '+ node.game.correct+ ' correct tables';
+                    message2 = 'So far, you had '+ node.game.correct+ ' correct tables';
                 }
 //                alert(message);
                 // Hide element with id above.
@@ -278,11 +287,6 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             };
         },
 
-    });
-
-
-    stager.extendStep('instructions', {
-        frame: 'instructions.htm'
     });
 
     //////////////////////////////////////////////////////////////////////////
