@@ -64,7 +64,7 @@ if (!fs.existsSync(OUTDIR_EXPORT)) {
 }
 
 FILES.forEach(file => {
-    
+
     if (checkUnique[file]) {
         console.log(`- skipping duplicated file: ${file}`);
         return;
@@ -72,8 +72,8 @@ FILES.forEach(file => {
 
     checkUnique[file] = true;
 
-    let db = new NDDB();    
-    console.log('- loading: ' + file);
+    let db = new NDDB();
+    console.log('- file: ' + file);
 
 
     // Load files.
@@ -81,7 +81,7 @@ FILES.forEach(file => {
         recursive: true,
         filter: file,
         dirFilter: dirFilter,
-        
+
         // Alternative filters:
         // filter: file => file === 'bonus_prolific.csv',
         // format: 'csv',
@@ -108,7 +108,3 @@ FILES.forEach(file => {
 
 
 //db.log(db => db.first())
-
-
-
-

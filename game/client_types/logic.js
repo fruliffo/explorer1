@@ -31,7 +31,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             keepUpdated: true
         });
 
-        // memory.sync();
+        memory.stream();
 
         memory.on('insert', item => {
             if (item.forms) {

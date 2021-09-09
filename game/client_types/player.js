@@ -167,10 +167,18 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             var button2;
             button2 = W.gid('nextTable');
             button2.onclick = function() {
+
+                if (node.game.correct === 2) {
+                    node.done();
+                    return;
+                }
+
                 // Hide element with id results.
                 // Show element with id above.
-            W.hide('results');
-            W.show('above');
+                W.hide('results');
+                W.show('above');
+
+
             };
         },
 
@@ -281,17 +289,18 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
 
-    stager.extendStep('instructions', {
-        frame: 'instructions.htm'
-    });
+    // stager.extendStep('instructions', {
+    //     frame: 'instructions.htm'
+    // });
 
     //////////////////////////////////////////////////////////////////////////
     // START OF THE SURVEY
     //////////////////////////////////////////////////////////////////////////
 
-    stager.extendStage('survey', {
-        frame: 'survey.htm'
-    });
+    // stager.extendStage('survey', {
+    //     frame: 'survey.htm'
+    // });
+
     //////////////////////////////////////////////////////////////////////////
     // Page 1. Language
     stager.extendStep('q1', {

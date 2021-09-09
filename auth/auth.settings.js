@@ -127,26 +127,26 @@ module.exports = {
      *
      * Default: undefined
      */
-    // claimIdValidateRequest: function(query, headers) {
-    //    if ('string' !== typeof query.a || query.a === '') {
-    //        return 'missing or invalid AssignmentId';
-    //    }
-    //    if ('string' !== typeof query.h || query.h === '') {
-    //        return 'missing or invalid HITId';
-    //    }
-    //    return true;
-    //},
+    claimIdValidateRequest: function(query, headers) {
+       if ('string' !== typeof query.a || query.a === '') {
+           return 'missing or invalid AssignmentId';
+       }
+       if ('string' !== typeof query.h || query.h === '') {
+           return 'missing or invalid HITId';
+       }
+       return true;
+    },
 
     /**
      * ## claimIdPostProcess
      *
      * Manipulates the client object after the claim id process succeeded
      */
-    //claimIdPostProcess: function(clientObj, query, headers) {
-    //    clientObj.WorkerId = query.id;
-    //    clientObj.AssignmentId = query.a;
-    //    clientObj.HITId = query.h;
-    //},
+    claimIdPostProcess: function(clientObj, query, headers) {
+        clientObj.WorkerId = query.id;
+        clientObj.AssignmentId = query.a;
+        clientObj.HITId = query.h;
+    },
 
     /**
      * ## claimIdModifyReply

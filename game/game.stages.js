@@ -56,6 +56,9 @@ module.exports = function(stager, settings) {
     // Modify the stager to skip one stage.
     // stager.skip('survey');
 
+    stager.skip('effort_slider');
+    stager.skip('effort_count');
+
     // To skip a step within a stage use:
     //stager.skip('instructions');
     // Notice: here all stages have just one step.
