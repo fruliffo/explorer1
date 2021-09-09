@@ -49,6 +49,8 @@ First stage survey Explorer
     node.get('pollinfo', function(pollinfo) {
         // Do something with the data, e.g.:
         W.setInnerHTML('Id_of_html_tag', 'Your pollution is: ' + pollinfo);
+        // Must create an element (e.g. a <div> or a <span>) with that id)
+        // in the frame of the page.
     });
     ```
 
