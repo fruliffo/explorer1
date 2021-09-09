@@ -41,7 +41,8 @@ First stage survey Explorer
 
         // Return it.
         return pollutionInfo;
-    })
+    });
+    ```
 
 - In file game/client_types/player.js, in the step in which pollution info is required:
 
