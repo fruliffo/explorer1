@@ -36,7 +36,8 @@ First stage survey Explorer
 
         // Use the answer to q3 to find the relevant pollution info in the
         // database stored in setup.
-        //
+        // Something like: q3Answers.forms.q3_2.value;
+        // console.log(q3Answers) // to see what's inside.
         let pollutionInfo = 50;
 
         // Return it.
