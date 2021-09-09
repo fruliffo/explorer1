@@ -7,7 +7,7 @@ First stage survey Explorer
 
 ## TODO CONDITIONAL QUESTION
 
-- Put pollution data in private/ folder
+- Put pollution data in private/ folder (create folder if not existing)
 
 - Inside game/game.setup.js load pollution data.
     - Create a new NDDB database
