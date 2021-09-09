@@ -13,15 +13,15 @@
  */
 module.exports = function(settings, stages) {
 
-    var setup;
-    setup = {};
+    let setup = {
 
-    setup.debug = true;
+        debug: true,
 
-    // setup.verbosity = 1;
+        // verbosity: 1
 
-    setup.window = {
-        promptOnleave: !setup.debug
+        window: {
+            promptOnleave: !setup.debug
+        }
     };
 
     // Metadata.
