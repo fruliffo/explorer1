@@ -75,6 +75,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     });
 
+
+    stager.extendStep('instructions', {
+        frame: 'instructions.htm'
+    });
+
+
+    // Effort task - Sliders
     stager.extendStep('effort_slider', {
         // donebutton: false,
         frame: 'effort.html',
@@ -167,12 +174,9 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             var button2;
             button2 = W.gid('nextTable');
             button2.onclick = function() {
-
-                if (node.game.correct === 2) {
-                    node.done();
-                    return;
+                if (node.game.correct === 4) {
+                    node.done;
                 }
-
                 // Hide element with id results.
                 // Show element with id above.
                 W.hide('results');
@@ -184,6 +188,8 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
     });
 
+    ///////////////////////////////////
+    // Effort task - Counting zeros
     stager.extendStep('effort_count', {
         // donebutton: false,
         frame: 'effort.html',
@@ -256,11 +262,13 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
                 if (count === zeros) {
                     message1 = 'The answer is correct.';
                     node.game.correct += 1;
-                    message2='So far, you had '+ node.game.correct+ ' correct tables';
+                    message2 = 'So far, you had ' +
+                               node.game.correct + ' correct tables';
                 }
                 else {
                     message1 = 'The answer is wrong.';
-                    message2='So far, you had '+ node.game.correct+ ' correct tables';
+                    message2 = 'So far, you had ' +
+                                node.game.correct+ ' correct tables';
                 }
 //                alert(message);
                 // Hide element with id above.
@@ -279,27 +287,23 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
             var button2;
             button2 = W.gid('nextTable');
             button2.onclick = function() {
+                if (node.game.correct === 4) {
+                    node.done();
+                    return;
+                }
                 // Hide element with id results.
                 // Show element with id above.
-            W.hide('results');
-            W.show('above');
+                W.hide('results');
+                W.show('above');
             };
         },
 
     });
 
-
-    // stager.extendStep('instructions', {
-    //     frame: 'instructions.htm'
-    // });
-
     //////////////////////////////////////////////////////////////////////////
     // START OF THE SURVEY
     //////////////////////////////////////////////////////////////////////////
 
-    // stager.extendStage('survey', {
-    //     frame: 'survey.htm'
-    // });
 
     //////////////////////////////////////////////////////////////////////////
     // Page 1. Language
