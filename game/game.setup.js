@@ -18,11 +18,9 @@ module.exports = function(settings, stages) {
         debug: true,
 
         // verbosity: 1
-
-        window: {
-            promptOnleave: !setup.debug
-        }
     };
+
+    setup.window = { promptOnleave: !setup.debug }
 
     // Metadata.
     // By default are as in package.json, but can be overwritten.
